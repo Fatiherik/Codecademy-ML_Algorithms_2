@@ -1,401 +1,335 @@
-{\rtf1\ansi\ansicpg1252\cocoartf2511
-\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Times-Roman;}
-{\colortbl;\red255\green255\blue255;\red129\green131\blue134;\red23\green23\blue23;\red255\green255\blue255;
-\red164\green191\blue255;\red252\green115\blue96;\red117\green255\blue242;\red254\green219\blue112;}
-{\*\expandedcolortbl;;\cssrgb\c57647\c58431\c59608;\cssrgb\c11765\c11765\c11765;\cssrgb\c100000\c100000\c100000;
-\cssrgb\c70196\c80000\c100000;\cssrgb\c100000\c53725\c45098;\cssrgb\c51373\c100000\c96078;\cssrgb\c100000\c87843\c51373;}
-\paperw11900\paperh16840\margl1440\margr1440\vieww28300\viewh17700\viewkind0
-\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+— # regex for removing punctuation!
+import re
+# nltk preprocessing magic
+import nltk
+from nltk.tokenize import word_tokenize
+from nltk.stem import PorterStemmer
+from nltk.stem import WordNetLemmatizer
+# grabbing a part of speech function:
+from part_of_speech import get_part_of_speech
 
-\f0\fs28 \cf0 \'97 
-\f1\fs28\fsmilli14080 \cf2 \cb3 \expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2 # regex for removing punctuation!\cf4 \cb1 \strokec4 \
-\pard\pardeftab720\sl440\partightenfactor0
-\cf5 \cb3 \strokec5 import\cf4 \strokec4  \cf6 \strokec6 re\cf4 \cb1 \strokec4 \
-\pard\pardeftab720\sl440\partightenfactor0
-\cf2 \cb3 \strokec2 # nltk preprocessing magic\cf4 \cb1 \strokec4 \
-\pard\pardeftab720\sl440\partightenfactor0
-\cf5 \cb3 \strokec5 import\cf4 \strokec4  \cf6 \strokec6 nltk\cf4 \cb1 \strokec4 \
-\cf5 \cb3 \strokec5 from\cf4 \strokec4  \cf6 \strokec6 nltk\cf4 \strokec4 .\cf7 \strokec7 tokenize\cf4 \strokec4  \cf5 \strokec5 import\cf4 \strokec4  \cf6 \strokec6 word_tokenize\cf4 \cb1 \strokec4 \
-\cf5 \cb3 \strokec5 from\cf4 \strokec4  \cf6 \strokec6 nltk\cf4 \strokec4 .\cf7 \strokec7 stem\cf4 \strokec4  \cf5 \strokec5 import\cf4 \strokec4  \cf6 \strokec6 PorterStemmer\cf4 \cb1 \strokec4 \
-\cf5 \cb3 \strokec5 from\cf4 \strokec4  \cf6 \strokec6 nltk\cf4 \strokec4 .\cf7 \strokec7 stem\cf4 \strokec4  \cf5 \strokec5 import\cf4 \strokec4  \cf6 \strokec6 WordNetLemmatizer\cf4 \cb1 \strokec4 \
-\pard\pardeftab720\sl440\partightenfactor0
-\cf2 \cb3 \strokec2 # grabbing a part of speech function:\cf4 \cb1 \strokec4 \
-\pard\pardeftab720\sl440\partightenfactor0
-\cf5 \cb3 \strokec5 from\cf4 \strokec4  \cf6 \strokec6 part_of_speech\cf4 \strokec4  \cf5 \strokec5 import\cf4 \strokec4  \cf6 \strokec6 get_part_of_speech\cf4 \cb1 \strokec4 \
-\
-\pard\pardeftab720\sl440\partightenfactor0
-\cf6 \cb3 \strokec6 text\cf4 \strokec4  = \cf8 \strokec8 "So many squids are jumping out of suitcases these days that you can barely go anywhere without seeing one burst forth from a tightly packed valise. I went to the dentist the other day, and sure enough I saw an angry one jump out of my dentist's bag within minutes of arriving. She hardly even noticed."\cf4 \cb1 \strokec4 \
-\
-\cf6 \cb3 \strokec6 cleaned\cf4 \strokec4  = \cf6 \strokec6 re\cf4 \strokec4 .\cf7 \strokec7 sub\cf4 \strokec4 (\cf8 \strokec8 '\\W+'\cf4 \strokec4 , \cf8 \strokec8 ' '\cf4 \strokec4 , \cf6 \strokec6 text\cf4 \strokec4 )\cb1 \
-\cf6 \cb3 \strokec6 tokenized\cf4 \strokec4  = \cf6 \strokec6 word_tokenize\cf4 \strokec4 (\cf6 \strokec6 cleaned\cf4 \strokec4 )\cb1 \
-\
-\cf6 \cb3 \strokec6 stemmer\cf4 \strokec4  = \cf6 \strokec6 PorterStemmer\cf4 \strokec4 ()\cb1 \
-\cf6 \cb3 \strokec6 stemmed\cf4 \strokec4  = [\cf6 \strokec6 stemmer\cf4 \strokec4 .\cf7 \strokec7 stem\cf4 \strokec4 (\cf6 \strokec6 token\cf4 \strokec4 ) \cf5 \strokec5 for\cf4 \strokec4  \cf6 \strokec6 token\cf4 \strokec4  \cf5 \strokec5 in\cf4 \strokec4  \cf6 \strokec6 tokenized\cf4 \strokec4 ]\cb1 \
-\
-\pard\pardeftab720\sl440\partightenfactor0
-\cf2 \cb3 \strokec2 ## -- CHANGE these -- ##\cf4 \cb1 \strokec4 \
-\pard\pardeftab720\sl440\partightenfactor0
-\cf6 \cb3 \strokec6 lemmatizer\cf4 \strokec4  = \cf6 \strokec6 WordNetLemmatizer\cf4 \strokec4 ()\cb1 \
-\cf6 \cb3 \strokec6 lemmatized\cf4 \strokec4  = [\cf6 \strokec6 lemmatizer\cf4 \strokec4 .\cf7 \strokec7 lemmatize\cf4 \strokec4 (\cf6 \strokec6 token\cf4 \strokec4 ,\cf6 \strokec6 get_part_of_speech\cf4 \strokec4 (\cf6 \strokec6 token\cf4 \strokec4 )) \cf5 \strokec5 for\cf4 \strokec4  \cf6 \strokec6 token\cf4 \strokec4  \cf5 \strokec5 in\cf4 \strokec4  \cf6 \strokec6 tokenized\cf4 \strokec4 ]\cb1 \
-\
-\pard\pardeftab720\sl440\partightenfactor0
-\cf4 \cb3 print(\cf8 \strokec8 "Stemmed text:"\cf4 \strokec4 )\cb1 \
-\cb3 print(\cf6 \strokec6 stemmed\cf4 \strokec4 )\cb1 \
-\cb3 print(\cf8 \strokec8 "\\nLemmatized text:"\cf4 \strokec4 )\cb1 \
-\cb3 print(\cf6 \strokec6 lemmatized\cf4 \strokec4 )\
-\
-\pard\pardeftab720\sl440\partightenfactor0
-\cf4 \cb1 \
-\
-\'97\cf5 \cb3 \strokec5 import\cf4 \strokec4  \cf6 \strokec6 spacy\cf4 \cb1 \strokec4 \
-\pard\pardeftab720\sl440\partightenfactor0
-\cf5 \cb3 \strokec5 from\cf4 \strokec4  \cf6 \strokec6 nltk\cf4 \strokec4  \cf5 \strokec5 import\cf4 \strokec4  \cf6 \strokec6 Tree\cf4 \cb1 \strokec4 \
-\cf5 \cb3 \strokec5 from\cf4 \strokec4  \cf6 \strokec6 squids\cf4 \strokec4  \cf5 \strokec5 import\cf4 \strokec4  \cf6 \strokec6 squids_text\cf4 \cb1 \strokec4 \
-\
-\pard\pardeftab720\sl440\partightenfactor0
-\cf6 \cb3 \strokec6 dependency_parser\cf4 \strokec4  = \cf6 \strokec6 spacy\cf4 \strokec4 .\cf7 \strokec7 load\cf4 \strokec4 (\cf8 \strokec8 'en'\cf4 \strokec4 )\cb1 \
-\
-\cf6 \cb3 \strokec6 parsed_squids\cf4 \strokec4  = \cf6 \strokec6 dependency_parser\cf4 \strokec4 (\cf6 \strokec6 squids_text\cf4 \strokec4 )\cb1 \
-\
-\pard\pardeftab720\sl440\partightenfactor0
-\cf2 \cb3 \strokec2 # Assign my_sentence a new value:\cf4 \cb1 \strokec4 \
-\pard\pardeftab720\sl440\partightenfactor0
-\cf6 \cb3 \strokec6 my_sentence\cf4 \strokec4  = \cf8 \strokec8 "Your sentence goes here!"\cf4 \cb1 \strokec4 \
-\cf6 \cb3 \strokec6 my_parsed_sentence\cf4 \strokec4  = \cf6 \strokec6 dependency_parser\cf4 \strokec4 (\cf6 \strokec6 my_sentence\cf4 \strokec4 )\cb1 \
-\
-\pard\pardeftab720\sl440\partightenfactor0
-\cf5 \cb3 \strokec5 def to_nltk_tree\cf4 \strokec4 (\cf6 \strokec6 node\cf4 \strokec4 ):\cb1 \
-\pard\pardeftab720\sl440\partightenfactor0
-\cf4 \cb3   \cf5 \strokec5 if\cf4 \strokec4  \cf6 \strokec6 node\cf4 \strokec4 .\cf7 \strokec7 n_lefts\cf4 \strokec4  + \cf6 \strokec6 node\cf4 \strokec4 .\cf7 \strokec7 n_rights\cf4 \strokec4  \cf6 \strokec6 >\cf4 \strokec4  \cf6 \strokec6 0\cf4 \strokec4 :\cb1 \
-\cb3     \cf6 \strokec6 parsed_child_nodes\cf4 \strokec4  = [\cf6 \strokec6 to_nltk_tree\cf4 \strokec4 (\cf6 \strokec6 child\cf4 \strokec4 ) \cf5 \strokec5 for\cf4 \strokec4  \cf6 \strokec6 child\cf4 \strokec4  \cf5 \strokec5 in\cf4 \strokec4  \cf6 \strokec6 node\cf4 \strokec4 .\cf7 \strokec7 children\cf4 \strokec4 ]\cb1 \
-\cb3     \cf5 \strokec5 return\cf4 \strokec4  \cf6 \strokec6 Tree\cf4 \strokec4 (\cf6 \strokec6 node\cf4 \strokec4 .\cf7 \strokec7 orth_\cf4 \strokec4 , \cf6 \strokec6 parsed_child_nodes\cf4 \strokec4 )\cb1 \
-\cb3   \cf5 \strokec5 else\cf4 \strokec4 :\cb1 \
-\cb3     \cf5 \strokec5 return\cf4 \strokec4  \cf6 \strokec6 node\cf4 \strokec4 .\cf7 \strokec7 orth_\cf4 \cb1 \strokec4 \
-\
-\pard\pardeftab720\sl440\partightenfactor0
-\cf5 \cb3 \strokec5 for\cf4 \strokec4  \cf6 \strokec6 sent\cf4 \strokec4  \cf5 \strokec5 in\cf4 \strokec4  \cf6 \strokec6 parsed_squids\cf4 \strokec4 .\cf7 \strokec7 sents\cf4 \strokec4 :\cb1 \
-\pard\pardeftab720\sl440\partightenfactor0
-\cf4 \cb3   \cf6 \strokec6 to_nltk_tree\cf4 \strokec4 (\cf6 \strokec6 sent\cf4 \strokec4 .\cf7 \strokec7 root\cf4 \strokec4 ).\cf7 \strokec7 pretty_print\cf4 \strokec4 ()\cb1 \
-\cb3   \cb1 \
-\pard\pardeftab720\sl440\partightenfactor0
-\cf5 \cb3 \strokec5 for\cf4 \strokec4  \cf6 \strokec6 sent\cf4 \strokec4  \cf5 \strokec5 in\cf4 \strokec4  \cf6 \strokec6 my_parsed_sentence\cf4 \strokec4 .\cf7 \strokec7 sents\cf4 \strokec4 :\cb1 \
-\pard\pardeftab720\sl440\partightenfactor0
-\cf4 \cb3  \cf6 \strokec6 to_nltk_tree\cf4 \strokec4 (\cf6 \strokec6 sent\cf4 \strokec4 .\cf7 \strokec7 root\cf4 \strokec4 ).\cf7 \strokec7 pretty_print\cf4 \strokec4 ()\
-\
-\'97\cf2 \strokec2 # importing regex and nltk\cf4 \cb1 \strokec4 \
-\pard\pardeftab720\sl440\partightenfactor0
-\cf5 \cb3 \strokec5 import\cf4 \strokec4  \cf6 \strokec6 re\cf4 \strokec4 , \cf6 \strokec6 nltk\cf4 \cb1 \strokec4 \
-\cf5 \cb3 \strokec5 from\cf4 \strokec4  \cf6 \strokec6 nltk\cf4 \strokec4 .\cf7 \strokec7 corpus\cf4 \strokec4  \cf5 \strokec5 import\cf4 \strokec4  \cf6 \strokec6 stopwords\cf4 \cb1 \strokec4 \
-\cf5 \cb3 \strokec5 from\cf4 \strokec4  \cf6 \strokec6 nltk\cf4 \strokec4 .\cf7 \strokec7 tokenize\cf4 \strokec4  \cf5 \strokec5 import\cf4 \strokec4  \cf6 \strokec6 word_tokenize\cf4 \cb1 \strokec4 \
-\cf5 \cb3 \strokec5 from\cf4 \strokec4  \cf6 \strokec6 nltk\cf4 \strokec4 .\cf7 \strokec7 stem\cf4 \strokec4  \cf5 \strokec5 import\cf4 \strokec4  \cf6 \strokec6 WordNetLemmatizer\cf4 \cb1 \strokec4 \
-\cf2 \cb3 \strokec2 # importing Counter to get word counts for bag of words\cf4 \cb1 \strokec4 \
-\cf5 \cb3 \strokec5 from\cf4 \strokec4  \cf6 \strokec6 collections\cf4 \strokec4  \cf5 \strokec5 import\cf4 \strokec4  \cf6 \strokec6 Counter\cf4 \cb1 \strokec4 \
-\cf2 \cb3 \strokec2 # importing a passage from Through the Looking Glass\cf4 \cb1 \strokec4 \
-\cf5 \cb3 \strokec5 from\cf4 \strokec4  \cf6 \strokec6 looking_glass\cf4 \strokec4  \cf5 \strokec5 import\cf4 \strokec4  \cf6 \strokec6 looking_glass_text\cf4 \cb1 \strokec4 \
-\cf2 \cb3 \strokec2 # importing part-of-speech function for lemmatization\cf4 \cb1 \strokec4 \
-\cf5 \cb3 \strokec5 from\cf4 \strokec4  \cf6 \strokec6 part_of_speech\cf4 \strokec4  \cf5 \strokec5 import\cf4 \strokec4  \cf6 \strokec6 get_part_of_speech\cf4 \cb1 \strokec4 \
-\
-\cf2 \cb3 \strokec2 # Change text to another string:\cf4 \cb1 \strokec4 \
-\cf6 \cb3 \strokec6 text\cf4 \strokec4  = \cf6 \strokec6 looking_glass_text\cf4 \cb1 \strokec4 \
-\
-\cf6 \cb3 \strokec6 cleaned\cf4 \strokec4  = \cf6 \strokec6 re\cf4 \strokec4 .\cf7 \strokec7 sub\cf4 \strokec4 (\cf8 \strokec8 '\\W+'\cf4 \strokec4 , \cf8 \strokec8 ' '\cf4 \strokec4 , \cf6 \strokec6 text\cf4 \strokec4 ).\cf7 \strokec7 lower\cf4 \strokec4 ()\cb1 \
-\cf6 \cb3 \strokec6 tokenized\cf4 \strokec4  = \cf6 \strokec6 word_tokenize\cf4 \strokec4 (\cf6 \strokec6 cleaned\cf4 \strokec4 )\cb1 \
-\
-\cf6 \cb3 \strokec6 stop_words\cf4 \strokec4  = \cf6 \strokec6 stopwords\cf4 \strokec4 .\cf7 \strokec7 words\cf4 \strokec4 (\cf8 \strokec8 'english'\cf4 \strokec4 )\cb1 \
-\cf6 \cb3 \strokec6 filtered\cf4 \strokec4  = [\cf6 \strokec6 word\cf4 \strokec4  \cf5 \strokec5 for\cf4 \strokec4  \cf6 \strokec6 word\cf4 \strokec4  \cf5 \strokec5 in\cf4 \strokec4  \cf6 \strokec6 tokenized\cf4 \strokec4  \cf5 \strokec5 if\cf4 \strokec4  \cf6 \strokec6 word\cf4 \strokec4  \cf5 \strokec5 not\cf4 \strokec4  \cf5 \strokec5 in\cf4 \strokec4  \cf6 \strokec6 stop_words\cf4 \strokec4 ]\cb1 \
-\
-\cf6 \cb3 \strokec6 normalizer\cf4 \strokec4  = \cf6 \strokec6 WordNetLemmatizer\cf4 \strokec4 ()\cb1 \
-\cf6 \cb3 \strokec6 normalized\cf4 \strokec4  = [\cf6 \strokec6 normalizer\cf4 \strokec4 .\cf7 \strokec7 lemmatize\cf4 \strokec4 (\cf6 \strokec6 token\cf4 \strokec4 , \cf6 \strokec6 get_part_of_speech\cf4 \strokec4 (\cf6 \strokec6 token\cf4 \strokec4 )) \cf5 \strokec5 for\cf4 \strokec4  \cf6 \strokec6 token\cf4 \strokec4  \cf5 \strokec5 in\cf4 \strokec4  \cf6 \strokec6 filtered\cf4 \strokec4 ]\cb1 \
-\cf2 \cb3 \strokec2 # Comment out the print statement below\cf4 \cb1 \strokec4 \
-\cf2 \cb3 \strokec2 #print(normalized)\cf4 \cb1 \strokec4 \
-\
-\cf2 \cb3 \strokec2 # Define bag_of_looking_glass_words & print:\cf4 \cb1 \strokec4 \
-\cf6 \cb3 \strokec6 bag_of_looking_glass_words\cf4 \strokec4 =\cf6 \strokec6 Counter\cf4 \strokec4 (\cf6 \strokec6 normalized\cf4 \strokec4 )\cb1 \
-\cb3 print(\cf6 \strokec6 bag_of_looking_glass_words\cf4 \strokec4 )\cb1 \
-\pard\pardeftab720\sl440\partightenfactor0
-\cf4 \
-\'97\
-\
-\'97\cf5 \cb3 \strokec5 import\cf4 \strokec4  \cf6 \strokec6 nltk\cf4 \strokec4 , \cf6 \strokec6 re\cf4 \cb1 \strokec4 \
-\pard\pardeftab720\sl440\partightenfactor0
-\cf5 \cb3 \strokec5 from\cf4 \strokec4  \cf6 \strokec6 nltk\cf4 \strokec4 .\cf7 \strokec7 tokenize\cf4 \strokec4  \cf5 \strokec5 import\cf4 \strokec4  \cf6 \strokec6 word_tokenize\cf4 \cb1 \strokec4 \
-\pard\pardeftab720\sl440\partightenfactor0
-\cf2 \cb3 \strokec2 # importing ngrams module from nltk\cf4 \cb1 \strokec4 \
-\pard\pardeftab720\sl440\partightenfactor0
-\cf5 \cb3 \strokec5 from\cf4 \strokec4  \cf6 \strokec6 nltk\cf4 \strokec4 .\cf7 \strokec7 util\cf4 \strokec4  \cf5 \strokec5 import\cf4 \strokec4  \cf6 \strokec6 ngrams\cf4 \cb1 \strokec4 \
-\cf5 \cb3 \strokec5 from\cf4 \strokec4  \cf6 \strokec6 collections\cf4 \strokec4  \cf5 \strokec5 import\cf4 \strokec4  \cf6 \strokec6 Counter\cf4 \cb1 \strokec4 \
-\cf5 \cb3 \strokec5 from\cf4 \strokec4  \cf6 \strokec6 looking_glass\cf4 \strokec4  \cf5 \strokec5 import\cf4 \strokec4  \cf6 \strokec6 looking_glass_full_text\cf4 \cb1 \strokec4 \
-\
-\pard\pardeftab720\sl440\partightenfactor0
-\cf6 \cb3 \strokec6 cleaned\cf4 \strokec4  = \cf6 \strokec6 re\cf4 \strokec4 .\cf7 \strokec7 sub\cf4 \strokec4 (\cf8 \strokec8 '\\W+'\cf4 \strokec4 , \cf8 \strokec8 ' '\cf4 \strokec4 , \cf6 \strokec6 looking_glass_full_text\cf4 \strokec4 ).\cf7 \strokec7 lower\cf4 \strokec4 ()\cb1 \
-\cf6 \cb3 \strokec6 tokenized\cf4 \strokec4  = \cf6 \strokec6 word_tokenize\cf4 \strokec4 (\cf6 \strokec6 cleaned\cf4 \strokec4 )\cb1 \
-\
-\pard\pardeftab720\sl440\partightenfactor0
-\cf2 \cb3 \strokec2 # Change the n value to 2:\cf4 \cb1 \strokec4 \
-\pard\pardeftab720\sl440\partightenfactor0
-\cf6 \cb3 \strokec6 looking_glass_bigrams\cf4 \strokec4  = \cf6 \strokec6 ngrams\cf4 \strokec4 (\cf6 \strokec6 tokenized\cf4 \strokec4 , \cf6 \strokec6 2\cf4 \strokec4 )\cb1 \
-\cf6 \cb3 \strokec6 looking_glass_bigrams_frequency\cf4 \strokec4  = \cf6 \strokec6 Counter\cf4 \strokec4 (\cf6 \strokec6 looking_glass_bigrams\cf4 \strokec4 )\cb1 \
-\
-\pard\pardeftab720\sl440\partightenfactor0
-\cf2 \cb3 \strokec2 # Change the n value to 3:\cf4 \cb1 \strokec4 \
-\pard\pardeftab720\sl440\partightenfactor0
-\cf6 \cb3 \strokec6 looking_glass_trigrams\cf4 \strokec4  = \cf6 \strokec6 ngrams\cf4 \strokec4 (\cf6 \strokec6 tokenized\cf4 \strokec4 , \cf6 \strokec6 3\cf4 \strokec4 )\cb1 \
-\cf6 \cb3 \strokec6 looking_glass_trigrams_frequency\cf4 \strokec4  = \cf6 \strokec6 Counter\cf4 \strokec4 (\cf6 \strokec6 looking_glass_trigrams\cf4 \strokec4 )\cb1 \
-\
-\pard\pardeftab720\sl440\partightenfactor0
-\cf2 \cb3 \strokec2 # Change the n value to a number greater than 3:\cf4 \cb1 \strokec4 \
-\pard\pardeftab720\sl440\partightenfactor0
-\cf6 \cb3 \strokec6 looking_glass_ngrams\cf4 \strokec4  = \cf6 \strokec6 ngrams\cf4 \strokec4 (\cf6 \strokec6 tokenized\cf4 \strokec4 , \cf6 \strokec6 5\cf4 \strokec4 )\cb1 \
-\cf6 \cb3 \strokec6 looking_glass_ngrams_frequency\cf4 \strokec4  = \cf6 \strokec6 Counter\cf4 \strokec4 (\cf6 \strokec6 looking_glass_ngrams\cf4 \strokec4 )\cb1 \
-\
-\pard\pardeftab720\sl440\partightenfactor0
-\cf4 \cb3 print(\cf8 \strokec8 "Looking Glass Bigrams:"\cf4 \strokec4 )\cb1 \
-\cb3 print(\cf6 \strokec6 looking_glass_bigrams_frequency\cf4 \strokec4 .\cf7 \strokec7 most_common\cf4 \strokec4 (\cf6 \strokec6 10\cf4 \strokec4 ))\cb1 \
-\
-\cb3 print(\cf8 \strokec8 "\\nLooking Glass Trigrams:"\cf4 \strokec4 )\cb1 \
-\cb3 print(\cf6 \strokec6 looking_glass_trigrams_frequency\cf4 \strokec4 .\cf7 \strokec7 most_common\cf4 \strokec4 (\cf6 \strokec6 10\cf4 \strokec4 ))\cb1 \
-\
-\cb3 print(\cf8 \strokec8 "\\nLooking Glass n-grams:"\cf4 \strokec4 )\cb1 \
-\cb3 print(\cf6 \strokec6 looking_glass_ngrams_frequency\cf4 \strokec4 .\cf7 \strokec7 most_common\cf4 \strokec4 (\cf6 \strokec6 10\cf4 \strokec4 ))\
-\
-\
-\
-\
-\'97\cf5 \strokec5 import\cf4 \strokec4  \cf6 \strokec6 nltk\cf4 \strokec4 , \cf6 \strokec6 re\cf4 \cb1 \strokec4 \
-\pard\pardeftab720\sl440\partightenfactor0
-\cf5 \cb3 \strokec5 from\cf4 \strokec4  \cf6 \strokec6 sherlock_holmes\cf4 \strokec4  \cf5 \strokec5 import\cf4 \strokec4  \cf6 \strokec6 bohemia_ch1\cf4 \strokec4 , \cf6 \strokec6 bohemia_ch2\cf4 \strokec4 , \cf6 \strokec6 bohemia_ch3\cf4 \strokec4 , \cf6 \strokec6 boscombe_ch1\cf4 \strokec4 , \cf6 \strokec6 boscombe_ch2\cf4 \strokec4 , \cf6 \strokec6 boscombe_ch3\cf4 \cb1 \strokec4 \
-\cf5 \cb3 \strokec5 from\cf4 \strokec4  \cf6 \strokec6 preprocessing\cf4 \strokec4  \cf5 \strokec5 import\cf4 \strokec4  \cf6 \strokec6 preprocess_text\cf4 \cb1 \strokec4 \
-\cf5 \cb3 \strokec5 from\cf4 \strokec4  \cf6 \strokec6 sklearn\cf4 \strokec4 .\cf7 \strokec7 feature_extraction\cf6 \strokec6 .\cf7 \strokec7 text\cf4 \strokec4  \cf5 \strokec5 import\cf4 \strokec4  \cf6 \strokec6 CountVectorizer\cf4 \strokec4 , \cf6 \strokec6 TfidfVectorizer\cf4 \cb1 \strokec4 \
-\cf5 \cb3 \strokec5 from\cf4 \strokec4  \cf6 \strokec6 sklearn\cf4 \strokec4 .\cf7 \strokec7 decomposition\cf4 \strokec4  \cf5 \strokec5 import\cf4 \strokec4  \cf6 \strokec6 LatentDirichletAllocation\cf4 \cb1 \strokec4 \
-\
-\cf2 \cb3 \strokec2 # preparing the text\cf4 \cb1 \strokec4 \
-\cf6 \cb3 \strokec6 corpus\cf4 \strokec4  = [\cf6 \strokec6 bohemia_ch1\cf4 \strokec4 , \cf6 \strokec6 bohemia_ch2\cf4 \strokec4 , \cf6 \strokec6 bohemia_ch3\cf4 \strokec4 , \cf6 \strokec6 boscombe_ch1\cf4 \strokec4 , \cf6 \strokec6 boscombe_ch2\cf4 \strokec4 , \cf6 \strokec6 boscombe_ch3\cf4 \strokec4 ]\cb1 \
-\cf6 \cb3 \strokec6 preprocessed_corpus\cf4 \strokec4  = [\cf6 \strokec6 preprocess_text\cf4 \strokec4 (\cf6 \strokec6 chapter\cf4 \strokec4 ) \cf5 \strokec5 for\cf4 \strokec4  \cf6 \strokec6 chapter\cf4 \strokec4  \cf5 \strokec5 in\cf4 \strokec4  \cf6 \strokec6 corpus\cf4 \strokec4 ]\cb1 \
-\
-\cf2 \cb3 \strokec2 # Update stop_list:\cf4 \cb1 \strokec4 \
-\cf6 \cb3 \strokec6 stop_list\cf4 \strokec4  = [\cf8 \strokec8 'say'\cf4 \strokec4 ,\cf8 \strokec8 'one'\cf4 \strokec4 ,\cf8 \strokec8 'bit'\cf4 \strokec4 ,\cf8 \strokec8 'always'\cf4 \strokec4 ,\cf8 \strokec8 'upon'\cf4 \strokec4 ,\cf8 \strokec8 'person'\cf4 \strokec4 ,\cf8 \strokec8 'holmes'\cf4 \strokec4 ,\cf8 \strokec8 'first'\cf4 \strokec4 ,\cf8 \strokec8 'know'\cf4 \strokec4 ,\cf8 \strokec8 'point'\cf4 \strokec4 ]\cb1 \
-\cf2 \cb3 \strokec2 # filtering topics for stop words\cf4 \cb1 \strokec4 \
-\cf5 \cb3 \strokec5 def filter_out_stop_words\cf4 \strokec4 (\cf6 \strokec6 corpus\cf4 \strokec4 ):\cb1 \
-\cb3   \cf6 \strokec6 no_stops_corpus\cf4 \strokec4  = []\cb1 \
-\cb3   \cf5 \strokec5 for\cf4 \strokec4  \cf6 \strokec6 chapter\cf4 \strokec4  \cf5 \strokec5 in\cf4 \strokec4  \cf6 \strokec6 corpus\cf4 \strokec4 :\cb1 \
-\cb3     \cf6 \strokec6 no_stops_chapter\cf4 \strokec4  = \cf8 \strokec8 " "\cf4 \strokec4 .\cf7 \strokec7 join\cf4 \strokec4 ([\cf6 \strokec6 word\cf4 \strokec4  \cf5 \strokec5 for\cf4 \strokec4  \cf6 \strokec6 word\cf4 \strokec4  \cf5 \strokec5 in\cf4 \strokec4  \cf6 \strokec6 chapter\cf4 \strokec4 .\cf7 \strokec7 split\cf4 \strokec4 (\cf8 \strokec8 " "\cf4 \strokec4 ) \cf5 \strokec5 if\cf4 \strokec4  \cf6 \strokec6 word\cf4 \strokec4  \cf5 \strokec5 not\cf4 \strokec4  \cf5 \strokec5 in\cf4 \strokec4  \cf6 \strokec6 stop_list\cf4 \strokec4 ])\cb1 \
-\cb3     \cf6 \strokec6 no_stops_corpus\cf4 \strokec4 .\cf7 \strokec7 append\cf4 \strokec4 (\cf6 \strokec6 no_stops_chapter\cf4 \strokec4 )\cb1 \
-\cb3   \cf5 \strokec5 return\cf4 \strokec4  \cf6 \strokec6 no_stops_corpus\cf4 \cb1 \strokec4 \
-\cf6 \cb3 \strokec6 filtered_for_stops\cf4 \strokec4  = \cf6 \strokec6 filter_out_stop_words\cf4 \strokec4 (\cf6 \strokec6 preprocessed_corpus\cf4 \strokec4 )\cb1 \
-\
-\cf2 \cb3 \strokec2 # creating the bag of words model\cf4 \cb1 \strokec4 \
-\cf6 \cb3 \strokec6 bag_of_words_creator\cf4 \strokec4  = \cf6 \strokec6 CountVectorizer\cf4 \strokec4 ()\cb1 \
-\cf6 \cb3 \strokec6 bag_of_words\cf4 \strokec4  = \cf6 \strokec6 bag_of_words_creator\cf4 \strokec4 .\cf7 \strokec7 fit_transform\cf4 \strokec4 (\cf6 \strokec6 filtered_for_stops\cf4 \strokec4 )\cb1 \
-\
-\cf2 \cb3 \strokec2 # creating the tf-idf model\cf4 \cb1 \strokec4 \
-\cf6 \cb3 \strokec6 tfidf_creator\cf4 \strokec4  = \cf6 \strokec6 TfidfVectorizer\cf4 \strokec4 (\cf6 \strokec6 min_df\cf4 \strokec4  = \cf6 \strokec6 0.2\cf4 \strokec4 )\cb1 \
-\cf6 \cb3 \strokec6 tfidf\cf4 \strokec4  = \cf6 \strokec6 tfidf_creator\cf4 \strokec4 .\cf7 \strokec7 fit_transform\cf4 \strokec4 (\cf6 \strokec6 preprocessed_corpus\cf4 \strokec4 )\cb1 \
-\
-\cf2 \cb3 \strokec2 # creating the bag of words LDA model\cf4 \cb1 \strokec4 \
-\cf6 \cb3 \strokec6 lda_bag_of_words_creator\cf4 \strokec4  = \cf6 \strokec6 LatentDirichletAllocation\cf4 \strokec4 (\cf6 \strokec6 learning_method\cf4 \strokec4 =\cf8 \strokec8 'online'\cf4 \strokec4 , \cf6 \strokec6 n_components\cf4 \strokec4 =\cf6 \strokec6 10\cf4 \strokec4 )\cb1 \
-\cf6 \cb3 \strokec6 lda_bag_of_words\cf4 \strokec4  = \cf6 \strokec6 lda_bag_of_words_creator\cf4 \strokec4 .\cf7 \strokec7 fit_transform\cf4 \strokec4 (\cf6 \strokec6 bag_of_words\cf4 \strokec4 )\cb1 \
-\
-\cf2 \cb3 \strokec2 # creating the tf-idf LDA model\cf4 \cb1 \strokec4 \
-\cf6 \cb3 \strokec6 lda_tfidf_creator\cf4 \strokec4  = \cf6 \strokec6 LatentDirichletAllocation\cf4 \strokec4 (\cf6 \strokec6 learning_method\cf4 \strokec4 =\cf8 \strokec8 'online'\cf4 \strokec4 , \cf6 \strokec6 n_components\cf4 \strokec4 =\cf6 \strokec6 10\cf4 \strokec4 )\cb1 \
-\cf6 \cb3 \strokec6 lda_tfidf\cf4 \strokec4  = \cf6 \strokec6 lda_tfidf_creator\cf4 \strokec4 .\cf7 \strokec7 fit_transform\cf4 \strokec4 (\cf6 \strokec6 tfidf\cf4 \strokec4 )\cb1 \
-\
-\cb3 print(\cf8 \strokec8 "~~~ Topics found by bag of words LDA ~~~"\cf4 \strokec4 )\cb1 \
-\cf5 \cb3 \strokec5 for\cf4 \strokec4  \cf6 \strokec6 topic_id\cf4 \strokec4 , \cf6 \strokec6 topic\cf4 \strokec4  \cf5 \strokec5 in\cf4 \strokec4  enumerate(\cf6 \strokec6 lda_bag_of_words_creator\cf4 \strokec4 .\cf7 \strokec7 components_\cf4 \strokec4 ):\cb1 \
-\cb3   \cf6 \strokec6 message\cf4 \strokec4  = \cf8 \strokec8 "Topic #\{\}: "\cf4 \strokec4 .\cf7 \strokec7 format\cf4 \strokec4 (\cf6 \strokec6 topic_id\cf4 \strokec4  + \cf6 \strokec6 1\cf4 \strokec4 )\cb1 \
-\cb3   \cf6 \strokec6 message\cf4 \strokec4  += \cf8 \strokec8 " "\cf4 \strokec4 .\cf7 \strokec7 join\cf4 \strokec4 ([\cf6 \strokec6 bag_of_words_creator\cf4 \strokec4 .\cf7 \strokec7 get_feature_names\cf4 \strokec4 ()[\cf6 \strokec6 i\cf4 \strokec4 ] \cf5 \strokec5 for\cf4 \strokec4  \cf6 \strokec6 i\cf4 \strokec4  \cf5 \strokec5 in\cf4 \strokec4  \cf6 \strokec6 topic\cf4 \strokec4 .\cf7 \strokec7 argsort\cf4 \strokec4 ()[:\cf6 \strokec6 -5\cf4 \strokec4  :\cf6 \strokec6 -1\cf4 \strokec4 ]])\cb1 \
-\cb3   print(\cf6 \strokec6 message\cf4 \strokec4 )\cb1 \
-\
-\cb3 print(\cf8 \strokec8 "\\n\\n~~~ Topics found by tf-idf LDA ~~~"\cf4 \strokec4 )\cb1 \
-\cf5 \cb3 \strokec5 for\cf4 \strokec4  \cf6 \strokec6 topic_id\cf4 \strokec4 , \cf6 \strokec6 topic\cf4 \strokec4  \cf5 \strokec5 in\cf4 \strokec4  enumerate(\cf6 \strokec6 lda_tfidf_creator\cf4 \strokec4 .\cf7 \strokec7 components_\cf4 \strokec4 ):\cb1 \
-\cb3   \cf6 \strokec6 message\cf4 \strokec4  = \cf8 \strokec8 "Topic #\{\}: "\cf4 \strokec4 .\cf7 \strokec7 format\cf4 \strokec4 (\cf6 \strokec6 topic_id\cf4 \strokec4  + \cf6 \strokec6 1\cf4 \strokec4 )\cb1 \
-\cb3   \cf6 \strokec6 message\cf4 \strokec4  += \cf8 \strokec8 " "\cf4 \strokec4 .\cf7 \strokec7 join\cf4 \strokec4 ([\cf6 \strokec6 tfidf_creator\cf4 \strokec4 .\cf7 \strokec7 get_feature_names\cf4 \strokec4 ()[\cf6 \strokec6 i\cf4 \strokec4 ] \cf5 \strokec5 for\cf4 \strokec4  \cf6 \strokec6 i\cf4 \strokec4  \cf5 \strokec5 in\cf4 \strokec4  \cf6 \strokec6 topic\cf4 \strokec4 .\cf7 \strokec7 argsort\cf4 \strokec4 ()[:\cf6 \strokec6 -5\cf4 \strokec4  :\cf6 \strokec6 -1\cf4 \strokec4 ]])\cb1 \
-\cb3   print(\cf6 \strokec6 message\cf4 \strokec4 )\cb1 \
-\pard\pardeftab720\sl440\partightenfactor0
-\cf4 \
-\
-\'97\cf5 \cb3 \strokec5 import\cf4 \strokec4  \cf6 \strokec6 nltk\cf4 \cb1 \strokec4 \
-\pard\pardeftab720\sl440\partightenfactor0
-\cf2 \cb3 \strokec2 # NLTK has a built-in function\cf4 \cb1 \strokec4 \
-\cf2 \cb3 \strokec2 # to check Levenshtein distance:\cf4 \cb1 \strokec4 \
-\cf5 \cb3 \strokec5 from\cf4 \strokec4  \cf6 \strokec6 nltk\cf4 \strokec4 .\cf7 \strokec7 metrics\cf4 \strokec4  \cf5 \strokec5 import\cf4 \strokec4  \cf6 \strokec6 edit_distance\cf4 \cb1 \strokec4 \
-\
-\cf5 \cb3 \strokec5 def print_levenshtein\cf4 \strokec4 (\cf6 \strokec6 string1\cf4 \strokec4 , \cf6 \strokec6 string2\cf4 \strokec4 ):\cb1 \
-\cb3   print(\cf8 \strokec8 "The Levenshtein distance from '\{0\}' to '\{1\}' is \{2\}!"\cf4 \strokec4 .\cf7 \strokec7 format\cf4 \strokec4 (\cf6 \strokec6 string1\cf4 \strokec4 , \cf6 \strokec6 string2\cf4 \strokec4 , \cf6 \strokec6 edit_distance\cf4 \strokec4 (\cf6 \strokec6 string1\cf4 \strokec4 , \cf6 \strokec6 string2\cf4 \strokec4 )))\cb1 \
-\
-\cf2 \cb3 \strokec2 # Check the distance between\cf4 \cb1 \strokec4 \
-\cf2 \cb3 \strokec2 # any two words here!\cf4 \cb1 \strokec4 \
-\cf6 \cb3 \strokec6 print_levenshtein\cf4 \strokec4 (\cf8 \strokec8 "fart"\cf4 \strokec4 , \cf8 \strokec8 "target"\cf4 \strokec4 )\cb1 \
-\
-\cf2 \cb3 \strokec2 # Assign passing strings here:\cf4 \cb1 \strokec4 \
-\cf6 \cb3 \strokec6 three_away_from_code\cf4 \strokec4  = \cf8 \strokec8 "codeaca"\cf4 \cb1 \strokec4 \
-\
-\cf6 \cb3 \strokec6 two_away_from_chunk\cf4 \strokec4  = \cf8 \strokec8 "chunkia"\cf4 \cb1 \strokec4 \
-\
-\cf6 \cb3 \strokec6 print_levenshtein\cf4 \strokec4 (\cf8 \strokec8 "code"\cf4 \strokec4 , \cf6 \strokec6 three_away_from_code\cf4 \strokec4 )\cb1 \
-\cf6 \cb3 \strokec6 print_levenshtein\cf4 \strokec4 (\cf8 \strokec8 "chunk"\cf4 \strokec4 , \cf6 \strokec6 two_away_from_chunk\cf4 \strokec4 )\cb1 \
-\pard\pardeftab720\sl440\partightenfactor0
-\cf4 \
-\
-\'97 \cf5 \cb3 \strokec5 import\cf4 \strokec4  \cf6 \strokec6 nltk\cf4 \strokec4 , \cf6 \strokec6 re\cf4 \strokec4 , \cf6 \strokec6 random\cf4 \cb1 \strokec4 \
-\pard\pardeftab720\sl440\partightenfactor0
-\cf5 \cb3 \strokec5 from\cf4 \strokec4  \cf6 \strokec6 nltk\cf4 \strokec4 .\cf7 \strokec7 tokenize\cf4 \strokec4  \cf5 \strokec5 import\cf4 \strokec4  \cf6 \strokec6 word_tokenize\cf4 \cb1 \strokec4 \
-\cf5 \cb3 \strokec5 from\cf4 \strokec4  \cf6 \strokec6 collections\cf4 \strokec4  \cf5 \strokec5 import\cf4 \strokec4  \cf6 \strokec6 defaultdict\cf4 \strokec4 , \cf6 \strokec6 deque\cf4 \cb1 \strokec4 \
-\cf5 \cb3 \strokec5 from\cf4 \strokec4  \cf6 \strokec6 document1\cf4 \strokec4  \cf5 \strokec5 import\cf4 \strokec4  \cf6 \strokec6 training_doc1\cf4 \cb1 \strokec4 \
-\cf5 \cb3 \strokec5 from\cf4 \strokec4  \cf6 \strokec6 document2\cf4 \strokec4  \cf5 \strokec5 import\cf4 \strokec4  \cf6 \strokec6 training_doc2\cf4 \cb1 \strokec4 \
-\cf5 \cb3 \strokec5 from\cf4 \strokec4  \cf6 \strokec6 document3\cf4 \strokec4  \cf5 \strokec5 import\cf4 \strokec4  \cf6 \strokec6 training_doc3\cf4 \cb1 \strokec4 \
-\
-\cf5 \cb3 \strokec5 class MarkovChain\cf4 \strokec4 :\cb1 \
-\pard\pardeftab720\sl440\partightenfactor0
-\cf4 \cb3   \cf5 \strokec5 def __init__\cf4 \strokec4 (\cf6 \strokec6 self\cf4 \strokec4 ):\cb1 \
-\cb3     \cf6 \strokec6 self\cf4 \strokec4 .\cf7 \strokec7 lookup_dict\cf4 \strokec4  = \cf6 \strokec6 defaultdict\cf4 \strokec4 (list)\cb1 \
-\cb3     \cf6 \strokec6 self\cf4 \strokec4 .\cf7 \strokec7 _seeded\cf4 \strokec4  = \cf5 \strokec5 False\cf4 \cb1 \strokec4 \
-\cb3     \cf6 \strokec6 self\cf4 \strokec4 .\cf7 \strokec7 __seed_me\cf4 \strokec4 ()\cb1 \
-\
-\cb3   \cf5 \strokec5 def __seed_me\cf4 \strokec4 (\cf6 \strokec6 self\cf4 \strokec4 , \cf6 \strokec6 rand_seed\cf4 \strokec4 =\cf5 \strokec5 None\cf4 \strokec4 ):\cb1 \
-\cb3     \cf5 \strokec5 if\cf4 \strokec4  \cf6 \strokec6 self\cf4 \strokec4 .\cf7 \strokec7 _seeded\cf4 \strokec4  \cf5 \strokec5 is\cf4 \strokec4  \cf5 \strokec5 not\cf4 \strokec4  \cf5 \strokec5 True\cf4 \strokec4 :\cb1 \
-\cb3       \cf5 \strokec5 try\cf4 \strokec4 :\cb1 \
-\cb3         \cf5 \strokec5 if\cf4 \strokec4  \cf6 \strokec6 rand_seed\cf4 \strokec4  \cf5 \strokec5 is\cf4 \strokec4  \cf5 \strokec5 not\cf4 \strokec4  \cf5 \strokec5 None\cf4 \strokec4 :\cb1 \
-\cb3           \cf6 \strokec6 random\cf4 \strokec4 .\cf7 \strokec7 seed\cf4 \strokec4 (\cf6 \strokec6 rand_seed\cf4 \strokec4 )\cb1 \
-\cb3         \cf5 \strokec5 else\cf4 \strokec4 :\cb1 \
-\cb3           \cf6 \strokec6 random\cf4 \strokec4 .\cf7 \strokec7 seed\cf4 \strokec4 ()\cb1 \
-\cb3         \cf6 \strokec6 self\cf4 \strokec4 .\cf7 \strokec7 _seeded\cf4 \strokec4  = \cf5 \strokec5 True\cf4 \cb1 \strokec4 \
-\cb3       \cf5 \strokec5 except\cf4 \strokec4  \cf6 \strokec6 NotImplementedError\cf4 \strokec4 :\cb1 \
-\cb3         \cf6 \strokec6 self\cf4 \strokec4 .\cf7 \strokec7 _seeded\cf4 \strokec4  = \cf5 \strokec5 False\cf4 \cb1 \strokec4 \
-\cb3     \cb1 \
-\cb3   \cf5 \strokec5 def add_document\cf4 \strokec4 (\cf6 \strokec6 self\cf4 \strokec4 , str):\cb1 \
-\cb3     \cf6 \strokec6 preprocessed_list\cf4 \strokec4  = \cf6 \strokec6 self\cf4 \strokec4 .\cf7 \strokec7 _preprocess\cf4 \strokec4 (str)\cb1 \
-\cb3     \cf6 \strokec6 pairs\cf4 \strokec4  = \cf6 \strokec6 self\cf4 \strokec4 .\cf7 \strokec7 __generate_tuple_keys\cf4 \strokec4 (\cf6 \strokec6 preprocessed_list\cf4 \strokec4 )\cb1 \
-\cb3     \cf5 \strokec5 for\cf4 \strokec4  \cf6 \strokec6 pair\cf4 \strokec4  \cf5 \strokec5 in\cf4 \strokec4  \cf6 \strokec6 pairs\cf4 \strokec4 :\cb1 \
-\cb3       \cf6 \strokec6 self\cf4 \strokec4 .\cf7 \strokec7 lookup_dict\cf4 \strokec4 [\cf6 \strokec6 pair\cf4 \strokec4 [\cf6 \strokec6 0\cf4 \strokec4 ]].\cf7 \strokec7 append\cf4 \strokec4 (\cf6 \strokec6 pair\cf4 \strokec4 [\cf6 \strokec6 1\cf4 \strokec4 ])\cb1 \
-\cb3   \cb1 \
-\cb3   \cf5 \strokec5 def _preprocess\cf4 \strokec4 (\cf6 \strokec6 self\cf4 \strokec4 , str):\cb1 \
-\cb3     \cf6 \strokec6 cleaned\cf4 \strokec4  = \cf6 \strokec6 re\cf4 \strokec4 .\cf7 \strokec7 sub\cf4 \strokec4 (\cf6 \strokec6 r\cf8 \strokec8 '\\W+'\cf4 \strokec4 , \cf8 \strokec8 ' '\cf4 \strokec4 , str).\cf7 \strokec7 lower\cf4 \strokec4 ()\cb1 \
-\cb3     \cf6 \strokec6 tokenized\cf4 \strokec4  = \cf6 \strokec6 word_tokenize\cf4 \strokec4 (\cf6 \strokec6 cleaned\cf4 \strokec4 )\cb1 \
-\cb3     \cf5 \strokec5 return\cf4 \strokec4  \cf6 \strokec6 tokenized\cf4 \cb1 \strokec4 \
-\
-\cb3   \cf5 \strokec5 def __generate_tuple_keys\cf4 \strokec4 (\cf6 \strokec6 self\cf4 \strokec4 , \cf6 \strokec6 data\cf4 \strokec4 ):\cb1 \
-\cb3     \cf5 \strokec5 if\cf4 \strokec4  len(\cf6 \strokec6 data\cf4 \strokec4 ) \cf6 \strokec6 <\cf4 \strokec4  \cf6 \strokec6 1\cf4 \strokec4 :\cb1 \
-\cb3       \cf5 \strokec5 return\cf4 \cb1 \strokec4 \
-\
-\cb3     \cf5 \strokec5 for\cf4 \strokec4  \cf6 \strokec6 i\cf4 \strokec4  \cf5 \strokec5 in\cf4 \strokec4  range(len(\cf6 \strokec6 data\cf4 \strokec4 ) - \cf6 \strokec6 1\cf4 \strokec4 ):\cb1 \
-\cb3       \cf5 \strokec5 yield\cf4 \strokec4  [ \cf6 \strokec6 data\cf4 \strokec4 [\cf6 \strokec6 i\cf4 \strokec4 ], \cf6 \strokec6 data\cf4 \strokec4 [\cf6 \strokec6 i\cf4 \strokec4  + \cf6 \strokec6 1\cf4 \strokec4 ] ]\cb1 \
-\cb3       \cb1 \
-\cb3   \cf5 \strokec5 def generate_text\cf4 \strokec4 (\cf6 \strokec6 self\cf4 \strokec4 , \cf6 \strokec6 max_length\cf4 \strokec4 =\cf6 \strokec6 50\cf4 \strokec4 ):\cb1 \
-\cb3     \cf6 \strokec6 context\cf4 \strokec4  = \cf6 \strokec6 deque\cf4 \strokec4 ()\cb1 \
-\cb3     \cf6 \strokec6 output\cf4 \strokec4  = []\cb1 \
-\cb3     \cf5 \strokec5 if\cf4 \strokec4  len(\cf6 \strokec6 self\cf4 \strokec4 .\cf7 \strokec7 lookup_dict\cf4 \strokec4 ) \cf6 \strokec6 >\cf4 \strokec4  \cf6 \strokec6 0\cf4 \strokec4 :\cb1 \
-\cb3       \cf6 \strokec6 self\cf4 \strokec4 .\cf7 \strokec7 __seed_me\cf4 \strokec4 (\cf6 \strokec6 rand_seed\cf4 \strokec4 =len(\cf6 \strokec6 self\cf4 \strokec4 .\cf7 \strokec7 lookup_dict\cf4 \strokec4 ))\cb1 \
-\cb3       \cf6 \strokec6 chain_head\cf4 \strokec4  = [list(\cf6 \strokec6 self\cf4 \strokec4 .\cf7 \strokec7 lookup_dict\cf4 \strokec4 )[\cf6 \strokec6 0\cf4 \strokec4 ]]\cb1 \
-\cb3       \cf6 \strokec6 context\cf4 \strokec4 .\cf7 \strokec7 extend\cf4 \strokec4 (\cf6 \strokec6 chain_head\cf4 \strokec4 )\cb1 \
-\cb3       \cb1 \
-\cb3       \cf5 \strokec5 while\cf4 \strokec4  len(\cf6 \strokec6 output\cf4 \strokec4 ) \cf6 \strokec6 <\cf4 \strokec4  (\cf6 \strokec6 max_length\cf4 \strokec4  - \cf6 \strokec6 1\cf4 \strokec4 ):\cb1 \
-\cb3         \cf6 \strokec6 next_choices\cf4 \strokec4  = \cf6 \strokec6 self\cf4 \strokec4 .\cf7 \strokec7 lookup_dict\cf4 \strokec4 [\cf6 \strokec6 context\cf4 \strokec4 [\cf6 \strokec6 -1\cf4 \strokec4 ]]\cb1 \
-\cb3         \cf5 \strokec5 if\cf4 \strokec4  len(\cf6 \strokec6 next_choices\cf4 \strokec4 ) \cf6 \strokec6 >\cf4 \strokec4  \cf6 \strokec6 0\cf4 \strokec4 :\cb1 \
-\cb3           \cf6 \strokec6 next_word\cf4 \strokec4  = \cf6 \strokec6 random\cf4 \strokec4 .\cf7 \strokec7 choice\cf4 \strokec4 (\cf6 \strokec6 next_choices\cf4 \strokec4 )\cb1 \
-\cb3           \cf6 \strokec6 context\cf4 \strokec4 .\cf7 \strokec7 append\cf4 \strokec4 (\cf6 \strokec6 next_word\cf4 \strokec4 )\cb1 \
-\cb3           \cf6 \strokec6 output\cf4 \strokec4 .\cf7 \strokec7 append\cf4 \strokec4 (\cf6 \strokec6 context\cf4 \strokec4 .\cf7 \strokec7 popleft\cf4 \strokec4 ())\cb1 \
-\cb3         \cf5 \strokec5 else\cf4 \strokec4 :\cb1 \
-\cb3           \cf5 \strokec5 break\cf4 \cb1 \strokec4 \
-\cb3       \cf6 \strokec6 output\cf4 \strokec4 .\cf7 \strokec7 extend\cf4 \strokec4 (list(\cf6 \strokec6 context\cf4 \strokec4 ))\cb1 \
-\cb3     \cf5 \strokec5 return\cf4 \strokec4  \cf8 \strokec8 " "\cf4 \strokec4 .\cf7 \strokec7 join\cf4 \strokec4 (\cf6 \strokec6 output\cf4 \strokec4 )\cb1 \
-\
-\pard\pardeftab720\sl440\partightenfactor0
-\cf6 \cb3 \strokec6 my_markov\cf4 \strokec4  = \cf6 \strokec6 MarkovChain\cf4 \strokec4 ()\cb1 \
-\cf6 \cb3 \strokec6 my_markov\cf4 \strokec4 .\cf7 \strokec7 add_document\cf4 \strokec4 (\cf6 \strokec6 training_doc1\cf4 \strokec4 )\cb1 \
-\cf6 \cb3 \strokec6 my_markov\cf4 \strokec4 .\cf7 \strokec7 add_document\cf4 \strokec4 (\cf6 \strokec6 training_doc2\cf4 \strokec4 )\cb1 \
-\cf6 \cb3 \strokec6 my_markov\cf4 \strokec4 .\cf7 \strokec7 add_document\cf4 \strokec4 (\cf6 \strokec6 training_doc3\cf4 \strokec4 )\cb1 \
-\cf6 \cb3 \strokec6 generated_text\cf4 \strokec4  = \cf6 \strokec6 my_markov\cf4 \strokec4 .\cf7 \strokec7 generate_text\cf4 \strokec4 ()\cb1 \
-\pard\pardeftab720\sl440\partightenfactor0
-\cf4 \cb3 print(\cf6 \strokec6 generated_text\cf4 \strokec4 )\cb1 \
-\
-\
-\
-\'97\cf5 \cb3 \strokec5 from\cf4 \strokec4  \cf6 \strokec6 reviews\cf4 \strokec4  \cf5 \strokec5 import\cf4 \strokec4  \cf6 \strokec6 counter\cf4 \strokec4 , \cf6 \strokec6 training_counts\cf4 \cb1 \strokec4 \
-\pard\pardeftab720\sl440\partightenfactor0
-\cf5 \cb3 \strokec5 from\cf4 \strokec4  \cf6 \strokec6 sklearn\cf4 \strokec4 .\cf7 \strokec7 feature_extraction\cf6 \strokec6 .\cf7 \strokec7 text\cf4 \strokec4  \cf5 \strokec5 import\cf4 \strokec4  \cf6 \strokec6 CountVectorizer\cf4 \cb1 \strokec4 \
-\cf5 \cb3 \strokec5 from\cf4 \strokec4  \cf6 \strokec6 sklearn\cf4 \strokec4 .\cf7 \strokec7 naive_bayes\cf4 \strokec4  \cf5 \strokec5 import\cf4 \strokec4  \cf6 \strokec6 MultinomialNB\cf4 \cb1 \strokec4 \
-\
-\pard\pardeftab720\sl440\partightenfactor0
-\cf2 \cb3 \strokec2 # Add your review:\cf4 \cb1 \strokec4 \
-\pard\pardeftab720\sl440\partightenfactor0
-\cf6 \cb3 \strokec6 review\cf4 \strokec4  = \cf8 \strokec8 "the lesson covers many topic and it seems a little bit hard"\cf4 \cb1 \strokec4 \
-\cf6 \cb3 \strokec6 review_counts\cf4 \strokec4  = \cf6 \strokec6 counter\cf4 \strokec4 .\cf7 \strokec7 transform\cf4 \strokec4 ([\cf6 \strokec6 review\cf4 \strokec4 ])\cb1 \
-\
-\cf6 \cb3 \strokec6 classifier\cf4 \strokec4  = \cf6 \strokec6 MultinomialNB\cf4 \strokec4 ()\cb1 \
-\cf6 \cb3 \strokec6 training_labels\cf4 \strokec4  = [\cf6 \strokec6 0\cf4 \strokec4 ] * \cf6 \strokec6 1000\cf4 \strokec4  + [\cf6 \strokec6 1\cf4 \strokec4 ] * \cf6 \strokec6 1000\cf4 \cb1 \strokec4 \
-\
-\cf6 \cb3 \strokec6 classifier\cf4 \strokec4 .\cf7 \strokec7 fit\cf4 \strokec4 (\cf6 \strokec6 training_counts\cf4 \strokec4 , \cf6 \strokec6 training_labels\cf4 \strokec4 )\cb1 \
-\pard\pardeftab720\sl440\partightenfactor0
-\cf4 \cb3   \cb1 \
-\pard\pardeftab720\sl440\partightenfactor0
-\cf6 \cb3 \strokec6 neg\cf4 \strokec4  = (\cf6 \strokec6 classifier\cf4 \strokec4 .\cf7 \strokec7 predict_proba\cf4 \strokec4 (\cf6 \strokec6 review_counts\cf4 \strokec4 )[\cf6 \strokec6 0\cf4 \strokec4 ][\cf6 \strokec6 0\cf4 \strokec4 ] * \cf6 \strokec6 100\cf4 \strokec4 ).\cf7 \strokec7 round\cf4 \strokec4 ()\cb1 \
-\cf6 \cb3 \strokec6 pos\cf4 \strokec4  = (\cf6 \strokec6 classifier\cf4 \strokec4 .\cf7 \strokec7 predict_proba\cf4 \strokec4 (\cf6 \strokec6 review_counts\cf4 \strokec4 )[\cf6 \strokec6 0\cf4 \strokec4 ][\cf6 \strokec6 1\cf4 \strokec4 ] * \cf6 \strokec6 100\cf4 \strokec4 ).\cf7 \strokec7 round\cf4 \strokec4 ()\cb1 \
-\
-\pard\pardeftab720\sl440\partightenfactor0
-\cf5 \cb3 \strokec5 if\cf4 \strokec4  \cf6 \strokec6 pos\cf4 \strokec4  \cf6 \strokec6 >\cf4 \strokec4  \cf6 \strokec6 50\cf4 \strokec4 :\cb1 \
-\pard\pardeftab720\sl440\partightenfactor0
-\cf4 \cb3   print(\cf8 \strokec8 "Thank you for your positive review!"\cf4 \strokec4 )\cb1 \
-\pard\pardeftab720\sl440\partightenfactor0
-\cf5 \cb3 \strokec5 elif\cf4 \strokec4  \cf6 \strokec6 neg\cf4 \strokec4  \cf6 \strokec6 >\cf4 \strokec4  \cf6 \strokec6 50\cf4 \strokec4 :\cb1 \
-\pard\pardeftab720\sl440\partightenfactor0
-\cf4 \cb3   print(\cf8 \strokec8 "We're sorry this hasn't been the best possible lesson for you! We're always looking to improve."\cf4 \strokec4 )\cb1 \
-\pard\pardeftab720\sl440\partightenfactor0
-\cf5 \cb3 \strokec5 else\cf4 \strokec4 :\cb1 \
-\pard\pardeftab720\sl440\partightenfactor0
-\cf4 \cb3   print(\cf8 \strokec8 "Naive Bayes cannot determine if this is negative or positive. Thank you or we're sorry?"\cf4 \strokec4 )\cb1 \
-\
-\cb3   \cb1 \
-\cb3 print(\cf8 \strokec8 "\\nAccording to our trained Naive Bayes classifier, the probability that your review was negative was \{0\}% and the probability it was positive was \{1\}%."\cf4 \strokec4 .\cf7 \strokec7 format\cf4 \strokec4 (\cf6 \strokec6 neg\cf4 \strokec4 , \cf6 \strokec6 pos\cf4 \strokec4 ))\
-\
-\
-\
-\
-\'97\cf5 \strokec5 from\cf4 \strokec4  \cf6 \strokec6 reviews\cf4 \strokec4  \cf5 \strokec5 import\cf4 \strokec4  \cf6 \strokec6 counter\cf4 \strokec4 , \cf6 \strokec6 training_counts\cf4 \cb1 \strokec4 \
-\pard\pardeftab720\sl440\partightenfactor0
-\cf5 \cb3 \strokec5 from\cf4 \strokec4  \cf6 \strokec6 sklearn\cf4 \strokec4 .\cf7 \strokec7 feature_extraction\cf6 \strokec6 .\cf7 \strokec7 text\cf4 \strokec4  \cf5 \strokec5 import\cf4 \strokec4  \cf6 \strokec6 CountVectorizer\cf4 \cb1 \strokec4 \
-\cf5 \cb3 \strokec5 from\cf4 \strokec4  \cf6 \strokec6 sklearn\cf4 \strokec4 .\cf7 \strokec7 naive_bayes\cf4 \strokec4  \cf5 \strokec5 import\cf4 \strokec4  \cf6 \strokec6 MultinomialNB\cf4 \cb1 \strokec4 \
-\
-\cf2 \cb3 \strokec2 # Add your review:\cf4 \cb1 \strokec4 \
-\cf6 \cb3 \strokec6 review\cf4 \strokec4  = \cf8 \strokec8 "It was lit!"\cf4 \cb1 \strokec4 \
-\cf6 \cb3 \strokec6 review_counts\cf4 \strokec4  = \cf6 \strokec6 counter\cf4 \strokec4 .\cf7 \strokec7 transform\cf4 \strokec4 ([\cf6 \strokec6 review\cf4 \strokec4 ])\cb1 \
-\
-\cf6 \cb3 \strokec6 classifier\cf4 \strokec4  = \cf6 \strokec6 MultinomialNB\cf4 \strokec4 ()\cb1 \
-\cf6 \cb3 \strokec6 training_labels\cf4 \strokec4  = [\cf6 \strokec6 0\cf4 \strokec4 ] * \cf6 \strokec6 1000\cf4 \strokec4  + [\cf6 \strokec6 1\cf4 \strokec4 ] * \cf6 \strokec6 1000\cf4 \cb1 \strokec4 \
-\
-\cf6 \cb3 \strokec6 classifier\cf4 \strokec4 .\cf7 \strokec7 fit\cf4 \strokec4 (\cf6 \strokec6 training_counts\cf4 \strokec4 , \cf6 \strokec6 training_labels\cf4 \strokec4 )\cb1 \
-\
-\cf6 \cb3 \strokec6 neg\cf4 \strokec4  = (\cf6 \strokec6 classifier\cf4 \strokec4 .\cf7 \strokec7 predict_proba\cf4 \strokec4 (\cf6 \strokec6 review_counts\cf4 \strokec4 )[\cf6 \strokec6 0\cf4 \strokec4 ][\cf6 \strokec6 0\cf4 \strokec4 ] * \cf6 \strokec6 100\cf4 \strokec4 ).\cf7 \strokec7 round\cf4 \strokec4 ()\cb1 \
-\cf6 \cb3 \strokec6 pos\cf4 \strokec4  = (\cf6 \strokec6 classifier\cf4 \strokec4 .\cf7 \strokec7 predict_proba\cf4 \strokec4 (\cf6 \strokec6 review_counts\cf4 \strokec4 )[\cf6 \strokec6 0\cf4 \strokec4 ][\cf6 \strokec6 1\cf4 \strokec4 ] * \cf6 \strokec6 100\cf4 \strokec4 ).\cf7 \strokec7 round\cf4 \strokec4 ()\cb1 \
-\
-\cf5 \cb3 \strokec5 if\cf4 \strokec4  \cf6 \strokec6 pos\cf4 \strokec4  \cf6 \strokec6 >\cf4 \strokec4  \cf6 \strokec6 50\cf4 \strokec4 :\cb1 \
-\cb3   print(\cf8 \strokec8 "Naive Bayes classifies this as positive."\cf4 \strokec4 )\cb1 \
-\cf5 \cb3 \strokec5 elif\cf4 \strokec4  \cf6 \strokec6 neg\cf4 \strokec4  \cf6 \strokec6 >\cf4 \strokec4  \cf6 \strokec6 50\cf4 \strokec4 :\cb1 \
-\cb3   print(\cf8 \strokec8 "Naive Bayes classifies this as negative."\cf4 \strokec4 )\cb1 \
-\cf5 \cb3 \strokec5 else\cf4 \strokec4 :\cb1 \
-\cb3   print(\cf8 \strokec8 "Naive Bayes cannot determine if this is negative or positive."\cf4 \strokec4 )\cb1 \
-\cb3   \cb1 \
-\
-\cb3 print(\cf8 \strokec8 "\\nAccording to our trained Naive Bayes classifier, the probability that your review was negative was \{0\}% and the probability it was positive was \{1\}%."\cf4 \strokec4 .\cf7 \strokec7 format\cf4 \strokec4 (\cf6 \strokec6 neg\cf4 \strokec4 , \cf6 \strokec6 pos\cf4 \strokec4 ))\
-\
-\
-\
-\'97\cf5 \strokec5 import\cf4 \strokec4  \cf6 \strokec6 nltk\cf4 \cb1 \strokec4 \
-\cf2 \cb3 \strokec2 # Levenshtein distance:\cf4 \cb1 \strokec4 \
-\cf5 \cb3 \strokec5 from\cf4 \strokec4  \cf6 \strokec6 nltk\cf4 \strokec4 .\cf7 \strokec7 metrics\cf4 \strokec4  \cf5 \strokec5 import\cf4 \strokec4  \cf6 \strokec6 edit_distance\cf4 \cb1 \strokec4 \
-\
-\cf2 \cb3 \strokec2 # an arbitrary plagiarism classifier:\cf4 \cb1 \strokec4 \
-\cf5 \cb3 \strokec5 def is_plagiarized\cf4 \strokec4 (\cf6 \strokec6 text1\cf4 \strokec4 , \cf6 \strokec6 text2\cf4 \strokec4 ):\cb1 \
-\cb3   \cf6 \strokec6 n\cf4 \strokec4  = \cf6 \strokec6 7\cf4 \cb1 \strokec4 \
-\cb3   \cf5 \strokec5 if\cf4 \strokec4  \cf6 \strokec6 edit_distance\cf4 \strokec4 (\cf6 \strokec6 text1\cf4 \strokec4 .\cf7 \strokec7 lower\cf4 \strokec4 (), \cf6 \strokec6 text2\cf4 \strokec4 .\cf7 \strokec7 lower\cf4 \strokec4 ()) \cf6 \strokec6 >\cf4 \strokec4  ((len(\cf6 \strokec6 text1\cf4 \strokec4 ) + len(\cf6 \strokec6 text2\cf4 \strokec4 )) / \cf6 \strokec6 n\cf4 \strokec4 ):\cb1 \
-\cb3     \cf5 \strokec5 return\cf4 \strokec4  \cf5 \strokec5 False\cf4 \cb1 \strokec4 \
-\cb3   \cf5 \strokec5 return\cf4 \strokec4  \cf5 \strokec5 True\cf4 \cb1 \strokec4 \
-\
-\cf6 \cb3 \strokec6 doc1\cf4 \strokec4  = \cf8 \strokec8 "is this plagiarized"\cf4 \cb1 \strokec4 \
-\cf6 \cb3 \strokec6 doc2\cf4 \strokec4  = \cf8 \strokec8 "maybe it's plagiarized"\cf4 \cb1 \strokec4 \
-\
-\cb3 print(\cf6 \strokec6 is_plagiarized\cf4 \strokec4 (\cf6 \strokec6 doc1\cf4 \strokec4 , \cf6 \strokec6 doc2\cf4 \strokec4 ))\cb1 \
-\
-\pard\pardeftab720\sl440\partightenfactor0
-\cf4 \
-}
+text = "So many squids are jumping out of suitcases these days that you can barely go anywhere without seeing one burst forth from a tightly packed valise. I went to the dentist the other day, and sure enough I saw an angry one jump out of my dentist's bag within minutes of arriving. She hardly even noticed."
+
+cleaned = re.sub('\W+', ' ', text)
+tokenized = word_tokenize(cleaned)
+
+stemmer = PorterStemmer()
+stemmed = [stemmer.stem(token) for token in tokenized]
+
+## -- CHANGE these -- ##
+lemmatizer = WordNetLemmatizer()
+lemmatized = [lemmatizer.lemmatize(token,get_part_of_speech(token)) for token in tokenized]
+
+print("Stemmed text:")
+print(stemmed)
+print("\nLemmatized text:")
+print(lemmatized)
+
+
+
+—import spacy
+from nltk import Tree
+from squids import squids_text
+
+dependency_parser = spacy.load('en')
+
+parsed_squids = dependency_parser(squids_text)
+
+# Assign my_sentence a new value:
+my_sentence = "Your sentence goes here!"
+my_parsed_sentence = dependency_parser(my_sentence)
+
+def to_nltk_tree(node):
+  if node.n_lefts + node.n_rights > 0:
+    parsed_child_nodes = [to_nltk_tree(child) for child in node.children]
+    return Tree(node.orth_, parsed_child_nodes)
+  else:
+    return node.orth_
+
+for sent in parsed_squids.sents:
+  to_nltk_tree(sent.root).pretty_print()
+  
+for sent in my_parsed_sentence.sents:
+ to_nltk_tree(sent.root).pretty_print()
+
+—# importing regex and nltk
+import re, nltk
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+from nltk.stem import WordNetLemmatizer
+# importing Counter to get word counts for bag of words
+from collections import Counter
+# importing a passage from Through the Looking Glass
+from looking_glass import looking_glass_text
+# importing part-of-speech function for lemmatization
+from part_of_speech import get_part_of_speech
+
+# Change text to another string:
+text = looking_glass_text
+
+cleaned = re.sub('\W+', ' ', text).lower()
+tokenized = word_tokenize(cleaned)
+
+stop_words = stopwords.words('english')
+filtered = [word for word in tokenized if word not in stop_words]
+
+normalizer = WordNetLemmatizer()
+normalized = [normalizer.lemmatize(token, get_part_of_speech(token)) for token in filtered]
+# Comment out the print statement below
+#print(normalized)
+
+# Define bag_of_looking_glass_words & print:
+bag_of_looking_glass_words=Counter(normalized)
+print(bag_of_looking_glass_words)
+
+—
+
+—import nltk, re
+from nltk.tokenize import word_tokenize
+# importing ngrams module from nltk
+from nltk.util import ngrams
+from collections import Counter
+from looking_glass import looking_glass_full_text
+
+cleaned = re.sub('\W+', ' ', looking_glass_full_text).lower()
+tokenized = word_tokenize(cleaned)
+
+# Change the n value to 2:
+looking_glass_bigrams = ngrams(tokenized, 2)
+looking_glass_bigrams_frequency = Counter(looking_glass_bigrams)
+
+# Change the n value to 3:
+looking_glass_trigrams = ngrams(tokenized, 3)
+looking_glass_trigrams_frequency = Counter(looking_glass_trigrams)
+
+# Change the n value to a number greater than 3:
+looking_glass_ngrams = ngrams(tokenized, 5)
+looking_glass_ngrams_frequency = Counter(looking_glass_ngrams)
+
+print("Looking Glass Bigrams:")
+print(looking_glass_bigrams_frequency.most_common(10))
+
+print("\nLooking Glass Trigrams:")
+print(looking_glass_trigrams_frequency.most_common(10))
+
+print("\nLooking Glass n-grams:")
+print(looking_glass_ngrams_frequency.most_common(10))
+
+
+
+
+—import nltk, re
+from sherlock_holmes import bohemia_ch1, bohemia_ch2, bohemia_ch3, boscombe_ch1, boscombe_ch2, boscombe_ch3
+from preprocessing import preprocess_text
+from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
+from sklearn.decomposition import LatentDirichletAllocation
+
+# preparing the text
+corpus = [bohemia_ch1, bohemia_ch2, bohemia_ch3, boscombe_ch1, boscombe_ch2, boscombe_ch3]
+preprocessed_corpus = [preprocess_text(chapter) for chapter in corpus]
+
+# Update stop_list:
+stop_list = ['say','one','bit','always','upon','person','holmes','first','know','point']
+# filtering topics for stop words
+def filter_out_stop_words(corpus):
+  no_stops_corpus = []
+  for chapter in corpus:
+    no_stops_chapter = " ".join([word for word in chapter.split(" ") if word not in stop_list])
+    no_stops_corpus.append(no_stops_chapter)
+  return no_stops_corpus
+filtered_for_stops = filter_out_stop_words(preprocessed_corpus)
+
+# creating the bag of words model
+bag_of_words_creator = CountVectorizer()
+bag_of_words = bag_of_words_creator.fit_transform(filtered_for_stops)
+
+# creating the tf-idf model
+tfidf_creator = TfidfVectorizer(min_df = 0.2)
+tfidf = tfidf_creator.fit_transform(preprocessed_corpus)
+
+# creating the bag of words LDA model
+lda_bag_of_words_creator = LatentDirichletAllocation(learning_method='online', n_components=10)
+lda_bag_of_words = lda_bag_of_words_creator.fit_transform(bag_of_words)
+
+# creating the tf-idf LDA model
+lda_tfidf_creator = LatentDirichletAllocation(learning_method='online', n_components=10)
+lda_tfidf = lda_tfidf_creator.fit_transform(tfidf)
+
+print("~~~ Topics found by bag of words LDA ~~~")
+for topic_id, topic in enumerate(lda_bag_of_words_creator.components_):
+  message = "Topic #{}: ".format(topic_id + 1)
+  message += " ".join([bag_of_words_creator.get_feature_names()[i] for i in topic.argsort()[:-5 :-1]])
+  print(message)
+
+print("\n\n~~~ Topics found by tf-idf LDA ~~~")
+for topic_id, topic in enumerate(lda_tfidf_creator.components_):
+  message = "Topic #{}: ".format(topic_id + 1)
+  message += " ".join([tfidf_creator.get_feature_names()[i] for i in topic.argsort()[:-5 :-1]])
+  print(message)
+
+
+—import nltk
+# NLTK has a built-in function
+# to check Levenshtein distance:
+from nltk.metrics import edit_distance
+
+def print_levenshtein(string1, string2):
+  print("The Levenshtein distance from '{0}' to '{1}' is {2}!".format(string1, string2, edit_distance(string1, string2)))
+
+# Check the distance between
+# any two words here!
+print_levenshtein("fart", "target")
+
+# Assign passing strings here:
+three_away_from_code = "codeaca"
+
+two_away_from_chunk = "chunkia"
+
+print_levenshtein("code", three_away_from_code)
+print_levenshtein("chunk", two_away_from_chunk)
+
+
+— import nltk, re, random
+from nltk.tokenize import word_tokenize
+from collections import defaultdict, deque
+from document1 import training_doc1
+from document2 import training_doc2
+from document3 import training_doc3
+
+class MarkovChain:
+  def __init__(self):
+    self.lookup_dict = defaultdict(list)
+    self._seeded = False
+    self.__seed_me()
+
+  def __seed_me(self, rand_seed=None):
+    if self._seeded is not True:
+      try:
+        if rand_seed is not None:
+          random.seed(rand_seed)
+        else:
+          random.seed()
+        self._seeded = True
+      except NotImplementedError:
+        self._seeded = False
+    
+  def add_document(self, str):
+    preprocessed_list = self._preprocess(str)
+    pairs = self.__generate_tuple_keys(preprocessed_list)
+    for pair in pairs:
+      self.lookup_dict[pair[0]].append(pair[1])
+  
+  def _preprocess(self, str):
+    cleaned = re.sub(r'\W+', ' ', str).lower()
+    tokenized = word_tokenize(cleaned)
+    return tokenized
+
+  def __generate_tuple_keys(self, data):
+    if len(data) < 1:
+      return
+
+    for i in range(len(data) - 1):
+      yield [ data[i], data[i + 1] ]
+      
+  def generate_text(self, max_length=50):
+    context = deque()
+    output = []
+    if len(self.lookup_dict) > 0:
+      self.__seed_me(rand_seed=len(self.lookup_dict))
+      chain_head = [list(self.lookup_dict)[0]]
+      context.extend(chain_head)
+      
+      while len(output) < (max_length - 1):
+        next_choices = self.lookup_dict[context[-1]]
+        if len(next_choices) > 0:
+          next_word = random.choice(next_choices)
+          context.append(next_word)
+          output.append(context.popleft())
+        else:
+          break
+      output.extend(list(context))
+    return " ".join(output)
+
+my_markov = MarkovChain()
+my_markov.add_document(training_doc1)
+my_markov.add_document(training_doc2)
+my_markov.add_document(training_doc3)
+generated_text = my_markov.generate_text()
+print(generated_text)
+
+
+
+—from reviews import counter, training_counts
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.naive_bayes import MultinomialNB
+
+# Add your review:
+review = "the lesson covers many topic and it seems a little bit hard"
+review_counts = counter.transform([review])
+
+classifier = MultinomialNB()
+training_labels = [0] * 1000 + [1] * 1000
+
+classifier.fit(training_counts, training_labels)
+  
+neg = (classifier.predict_proba(review_counts)[0][0] * 100).round()
+pos = (classifier.predict_proba(review_counts)[0][1] * 100).round()
+
+if pos > 50:
+  print("Thank you for your positive review!")
+elif neg > 50:
+  print("We're sorry this hasn't been the best possible lesson for you! We're always looking to improve.")
+else:
+  print("Naive Bayes cannot determine if this is negative or positive. Thank you or we're sorry?")
+
+  
+print("\nAccording to our trained Naive Bayes classifier, the probability that your review was negative was {0}% and the probability it was positive was {1}%.".format(neg, pos))
+
+
+
+
+—from reviews import counter, training_counts
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.naive_bayes import MultinomialNB
+
+# Add your review:
+review = "It was lit!"
+review_counts = counter.transform([review])
+
+classifier = MultinomialNB()
+training_labels = [0] * 1000 + [1] * 1000
+
+classifier.fit(training_counts, training_labels)
+
+neg = (classifier.predict_proba(review_counts)[0][0] * 100).round()
+pos = (classifier.predict_proba(review_counts)[0][1] * 100).round()
+
+if pos > 50:
+  print("Naive Bayes classifies this as positive.")
+elif neg > 50:
+  print("Naive Bayes classifies this as negative.")
+else:
+  print("Naive Bayes cannot determine if this is negative or positive.")
+  
+
+print("\nAccording to our trained Naive Bayes classifier, the probability that your review was negative was {0}% and the probability it was positive was {1}%.".format(neg, pos))
+
+
+
+—import nltk
+# Levenshtein distance:
+from nltk.metrics import edit_distance
+
+# an arbitrary plagiarism classifier:
+def is_plagiarized(text1, text2):
+  n = 7
+  if edit_distance(text1.lower(), text2.lower()) > ((len(text1) + len(text2)) / n):
+    return False
+  return True
+
+doc1 = "is this plagiarized"
+doc2 = "maybe it's plagiarized"
+
+print(is_plagiarized(doc1, doc2))
+
+
