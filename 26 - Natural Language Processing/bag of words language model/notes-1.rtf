@@ -1,0 +1,347 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2511
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;\f1\fswiss\fcharset0 Helvetica;\f2\froman\fcharset0 Times-Roman;
+}
+{\colortbl;\red255\green255\blue255;\red56\green56\blue56;\red255\green255\blue255;\red164\green191\blue255;
+\red23\green23\blue23;\red252\green115\blue96;\red117\green255\blue242;\red129\green131\blue134;\red254\green219\blue112;
+}
+{\*\expandedcolortbl;;\cssrgb\c28235\c28235\c28235;\cssrgb\c100000\c100000\c100000;\cssrgb\c70196\c80000\c100000;
+\cssrgb\c11765\c11765\c11765;\cssrgb\c100000\c53725\c45098;\cssrgb\c51373\c100000\c96078;\cssrgb\c57647\c58431\c59608;\cssrgb\c100000\c87843\c51373;
+}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{none\}}{\leveltext\leveltemplateid1\'00;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\paperw11900\paperh16840\margl1440\margr1440\vieww28300\viewh14800\viewkind0
+\deftab720
+\pard\pardeftab720\sl560\sa240\partightenfactor0
+
+\f0\fs35\fsmilli17600 \cf2 \cb3 \expnd0\expndtw0\kerning0
+You made it! And you\'92ve learned plenty about the bag-of-words language model along the way:\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl560\sa120\partightenfactor0
+\ls1\ilvl0\cf2 \kerning1\expnd0\expndtw0 		\expnd0\expndtw0\kerning0
+Bag-of-words (BoW) \'97 also referred to as the unigram model \'97 is a statistical language model based on word count.\cb1 \
+\ls1\ilvl0\cb3 \kerning1\expnd0\expndtw0 		\expnd0\expndtw0\kerning0
+There are loads of real-world applications for BoW.\cb1 \
+\ls1\ilvl0\cb3 \kerning1\expnd0\expndtw0 		\expnd0\expndtw0\kerning0
+BoW can be implemented as a Python dictionary with each key set to a word and each value set to the number of times that word appears in a text.\cb1 \
+\ls1\ilvl0\cb3 \kerning1\expnd0\expndtw0 		\expnd0\expndtw0\kerning0
+For BoW, training data is the text that is used to build a BoW model.\cb1 \
+\ls1\ilvl0\cb3 \kerning1\expnd0\expndtw0 		\expnd0\expndtw0\kerning0
+BoW test data is the new text that is converted to a BoW vector using a trained features dictionary.\cb1 \
+\ls1\ilvl0\cb3 \kerning1\expnd0\expndtw0 		\expnd0\expndtw0\kerning0
+A feature vector is a numeric depiction of an item\'92s salient features.\cb1 \
+\ls1\ilvl0\cb3 \kerning1\expnd0\expndtw0 		\expnd0\expndtw0\kerning0
+Feature extraction (or vectorization) is the process of turning text into a BoW vector.\cb1 \
+\ls1\ilvl0\cb3 \kerning1\expnd0\expndtw0 		\expnd0\expndtw0\kerning0
+A features dictionary is a mapping of each unique word in the training data to a unique index. This is used to build out BoW vectors.\cb1 \
+\ls1\ilvl0\cb3 \kerning1\expnd0\expndtw0 		\expnd0\expndtw0\kerning0
+BoW has less data sparsity than other statistical models. It also suffers less from overfitting.\cb1 \
+\ls1\ilvl0\cb3 \kerning1\expnd0\expndtw0 		\expnd0\expndtw0\kerning0
+BoW has higher perplexity than other models, making it less ideal for language prediction.\cb1 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl560\sa240\partightenfactor0
+\ls1\ilvl0\cf2 \cb3 \kerning1\expnd0\expndtw0 		\expnd0\expndtw0\kerning0
+One solution to overfitting is language smoothing, in which a bit of probability is taken from known words and allotted to unknown words.
+\f1\fs28 \cf0 \cb1 \kerning1\expnd0\expndtw0 \
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardeftab720\pardirnatural\partightenfactor0
+\cf0 \
+\
+\
+\'97 
+\f2\fs28\fsmilli14080 \cf4 \cb5 \expnd0\expndtw0\kerning0
+from\cf3  \cf6 spam_data\cf3  \cf4 import\cf3  \cf6 training_spam_docs\cf3 , \cf6 training_doc_tokens\cf3 , \cf6 training_labels\cf3 \cb1 \
+\pard\pardeftab720\sl440\partightenfactor0
+\cf4 \cb5 from\cf3  \cf6 sklearn\cf3 .\cf7 naive_bayes\cf3  \cf4 import\cf3  \cf6 MultinomialNB\cf3 \cb1 \
+\cf4 \cb5 from\cf3  \cf6 preprocessing\cf3  \cf4 import\cf3  \cf6 preprocess_text\cf3 \cb1 \
+\
+\pard\pardeftab720\sl440\partightenfactor0
+\cf8 \cb5 # Add your email text to test_text between the triple quotes:\cf3 \cb1 \
+\pard\pardeftab720\sl440\partightenfactor0
+\cf6 \cb5 test_text\cf3  = \cf9 """\cf3 \cb1 \
+\pard\pardeftab720\sl440\partightenfactor0
+\cf9 \cb5  \cf3 \cb1 \
+\
+\cf9 \cb5 I believe you are to be our new Turkish translater and will share the information we send you with your fellow countrymen. I just wanted to let you know that I am preparing some information now and hope to send it later this evening or tomorrow morning.\cf3 \cb1 \
+\
+\cf9 \cb5  \cf3 \cb1 \
+\
+\cf9 \cb5 We usually send details to all translaters on Wednesday or Thursday every week \'96 sometimes we miss a week if there\'92s not much going. Thank you for being willing to help us.\cf3 \cb1 \
+\cf9 \cb5 """\cf3 \cb1 \
+\pard\pardeftab720\sl440\partightenfactor0
+\cf6 \cb5 test_tokens\cf3  = \cf6 preprocess_text\cf3 (\cf6 test_text\cf3 )\cb1 \
+\
+\cf4 \cb5 def create_features_dictionary\cf3 (\cf6 document_tokens\cf3 ):\cb1 \
+\cb5   \cf6 features_dictionary\cf3  = \{\}\cb1 \
+\cb5   \cf6 index\cf3  = \cf6 0\cf3 \cb1 \
+\cb5   \cf4 for\cf3  \cf6 token\cf3  \cf4 in\cf3  \cf6 document_tokens\cf3 :\cb1 \
+\cb5     \cf4 if\cf3  \cf6 token\cf3  \cf4 not\cf3  \cf4 in\cf3  \cf6 features_dictionary\cf3 :\cb1 \
+\cb5       \cf6 features_dictionary\cf3 [\cf6 token\cf3 ] = \cf6 index\cf3 \cb1 \
+\cb5       \cf6 index\cf3  += \cf6 1\cf3 \cb1 \
+\cb5   \cf4 return\cf3  \cf6 features_dictionary\cf3 \cb1 \
+\
+\cf4 \cb5 def tokens_to_bow_vector\cf3 (\cf6 document_tokens\cf3 , \cf6 features_dictionary\cf3 ):\cb1 \
+\cb5   \cf6 bow_vector\cf3  = [\cf6 0\cf3 ] * len(\cf6 features_dictionary\cf3 )\cb1 \
+\cb5   \cf4 for\cf3  \cf6 token\cf3  \cf4 in\cf3  \cf6 document_tokens\cf3 :\cb1 \
+\cb5     \cf4 if\cf3  \cf6 token\cf3  \cf4 in\cf3  \cf6 features_dictionary\cf3 :\cb1 \
+\cb5       \cf6 feature_index\cf3  = \cf6 features_dictionary\cf3 [\cf6 token\cf3 ]\cb1 \
+\cb5       \cf6 bow_vector\cf3 [\cf6 feature_index\cf3 ] += \cf6 1\cf3 \cb1 \
+\cb5   \cf4 return\cf3  \cf6 bow_vector\cf3 \cb1 \
+\
+\cf6 \cb5 bow_sms_dictionary\cf3  = \cf6 create_features_dictionary\cf3 (\cf6 training_doc_tokens\cf3 )\cb1 \
+\cf6 \cb5 training_vectors\cf3  = [\cf6 tokens_to_bow_vector\cf3 (\cf6 training_doc\cf3 , \cf6 bow_sms_dictionary\cf3 ) \cf4 for\cf3  \cf6 training_doc\cf3  \cf4 in\cf3  \cf6 training_spam_docs\cf3 ]\cb1 \
+\cf6 \cb5 test_vectors\cf3  = [\cf6 tokens_to_bow_vector\cf3 (\cf6 test_tokens\cf3 , \cf6 bow_sms_dictionary\cf3 )]\cb1 \
+\
+\cf6 \cb5 spam_classifier\cf3  = \cf6 MultinomialNB\cf3 ()\cb1 \
+\cf6 \cb5 spam_classifier\cf3 .\cf7 fit\cf3 (\cf6 training_vectors\cf3 , \cf6 training_labels\cf3 )\cb1 \
+\
+\cf6 \cb5 predictions\cf3  = \cf6 spam_classifier\cf3 .\cf7 predict\cf3 (\cf6 test_vectors\cf3 )\cb1 \
+\
+\cb5 print(\cf9 "Looks like a normal email!"\cf3  \cf4 if\cf3  \cf6 predictions\cf3 [\cf6 0\cf3 ] == \cf6 0\cf3  \cf4 else\cf3  \cf9 "You've got spam!"\cf3 )\
+\
+\
+\
+\
+\'97\cf4 from\cf3  \cf6 preprocessing\cf3  \cf4 import\cf3  \cf6 preprocess_text\cf3 \cb1 \
+\pard\pardeftab720\sl440\partightenfactor0
+\cf8 \cb5 # Define text_to_bow() below:\cf3 \cb1 \
+\pard\pardeftab720\sl440\partightenfactor0
+\cf4 \cb5 def text_to_bow\cf3 (\cf6 some_text\cf3 ):\cb1 \
+\cb5   \cf6 bow_dictionary\cf3 =\{\}\cb1 \
+\cb5   \cf6 tokens\cf3 = \cf6 preprocess_text\cf3 (\cf6 some_text\cf3 )\cb1 \
+\cb5   \cf4 for\cf3  \cf6 token\cf3  \cf4 in\cf3  \cf6 tokens\cf3 :\cb1 \
+\cb5     \cf4 if\cf3  \cf6 token\cf3  \cf4 in\cf3  \cf6 bow_dictionary\cf3 :\cb1 \
+\cb5       \cf6 bow_dictionary\cf3 [\cf6 token\cf3 ]+=\cf6 1\cf3 \cb1 \
+\cb5     \cf4 else\cf3 :\cb1 \
+\cb5       \cf6 bow_dictionary\cf3 [\cf6 token\cf3 ]=\cf6 1\cf3 \cb1 \
+\
+\cb5   \cf4 return\cf3  \cf6 bow_dictionary\cf3 \cb1 \
+\
+\cb5 print(\cf6 text_to_bow\cf3 (\cf9 "I love fantastic flying fish. These flying fish are just ok, so maybe I will find another few fantastic fish..."\cf3 ))\cb1 \
+\
+\
+\
+\'97\cf4 \cb5 from\cf3  \cf6 preprocessing\cf3  \cf4 import\cf3  \cf6 preprocess_text\cf3 \cb1 \
+\pard\pardeftab720\sl440\partightenfactor0
+\cf8 \cb5 # Define create_features_dictionary() below:\cf3 \cb1 \
+\pard\pardeftab720\sl440\partightenfactor0
+\cf4 \cb5 def create_features_dictionary\cf3 (\cf6 documents\cf3 ):\cb1 \
+\cb5   \cf6 features_dictionary\cf3 =\{\}\cb1 \
+\cb5   \cf6 merged\cf3 =\cf9 " "\cf3 .\cf7 join\cf3 (\cf6 documents\cf3 )\cb1 \
+\cb5   \cf6 tokens\cf3 = \cf6 preprocess_text\cf3 (\cf6 merged\cf3 )\cb1 \
+\cb5   \cf6 index\cf3 =\cf6 0\cf3 \cb1 \
+\cb5   \cf4 for\cf3  \cf6 token\cf3  \cf4 in\cf3  \cf6 tokens\cf3 :\cb1 \
+\cb5     \cf4 if\cf3  \cf6 token\cf3  \cf4 not\cf3  \cf4 in\cf3  \cf6 features_dictionary\cf3 :\cb1 \
+\cb5       \cf6 features_dictionary\cf3 [\cf6 token\cf3 ]=\cf6 index\cf3 \cb1 \
+\cb5       \cf6 index\cf3 +=\cf6 1\cf3 \cb1 \
+\cb5   \cf4 return\cf3  \cf6 features_dictionary\cf3 ,\cf6 tokens\cf3 \cb1 \
+\
+\cf6 \cb5 training_documents\cf3  = [\cf9 "Five fantastic fish flew off to find faraway functions."\cf3 , \cf9 "Maybe find another five fantastic fish?"\cf3 , \cf9 "Find my fish with a function please!"\cf3 ]\cb1 \
+\
+\cb5 print(\cf6 create_features_dictionary\cf3 (\cf6 training_documents\cf3 )[\cf6 0\cf3 ])\cb1 \
+\
+\
+\'97\cf4 \cb5 from\cf3  \cf6 preprocessing\cf3  \cf4 import\cf3  \cf6 preprocess_text\cf3 \cb1 \
+\pard\pardeftab720\sl440\partightenfactor0
+\cf8 \cb5 # Define text_to_bow_vector() below:\cf3 \cb1 \
+\pard\pardeftab720\sl440\partightenfactor0
+\cf4 \cb5 def text_to_bow_vector\cf3 (\cf6 some_text\cf3 , \cf6 features_dictionary\cf3 ):\cb1 \
+\cb5   \cf6 bow_vector\cf3  = [\cf6 0\cf3 ] * len(\cf6 features_dictionary\cf3 )\cb1 \
+\cb5   \cf6 tokens\cf3  = \cf6 preprocess_text\cf3 (\cf6 some_text\cf3 )\cb1 \
+\cb5   \cf4 for\cf3  \cf6 token\cf3  \cf4 in\cf3  \cf6 tokens\cf3 :\cb1 \
+\cb5     \cf6 feature_index\cf3  = \cf6 features_dictionary\cf3 [\cf6 token\cf3 ]\cb1 \
+\cb5     \cf6 bow_vector\cf3 [\cf6 feature_index\cf3 ] += \cf6 1\cf3 \cb1 \
+\cb5   \cf4 return\cf3  \cf6 bow_vector\cf3 , \cf6 tokens\cf3 \cb1 \
+\
+\cf6 \cb5 features_dictionary\cf3  = \{\cf9 'function'\cf3 : \cf6 8\cf3 , \cf9 'please'\cf3 : \cf6 14\cf3 , \cf9 'find'\cf3 : \cf6 6\cf3 , \cf9 'five'\cf3 : \cf6 0\cf3 , \cf9 'with'\cf3 : \cf6 12\cf3 , \cf9 'fantastic'\cf3 : \cf6 1\cf3 , \cf9 'my'\cf3 : \cf6 11\cf3 , \cf9 'another'\cf3 : \cf6 10\cf3 , \cf9 'a'\cf3 : \cf6 13\cf3 , \cf9 'maybe'\cf3 : \cf6 9\cf3 , \cf9 'to'\cf3 : \cf6 5\cf3 , \cf9 'off'\cf3 : \cf6 4\cf3 , \cf9 'faraway'\cf3 : \cf6 7\cf3 , \cf9 'fish'\cf3 : \cf6 2\cf3 , \cf9 'fly'\cf3 : \cf6 3\cf3 \}\cb1 \
+\
+\cf6 \cb5 text\cf3  = \cf9 "Another five fish find another faraway fish."\cf3 \cb1 \
+\cb5 print(\cf6 text_to_bow_vector\cf3 (\cf6 text\cf3 , \cf6 features_dictionary\cf3 )[\cf6 0\cf3 ])\
+\
+\
+\'97\cf4 from\cf3  \cf6 spam_data\cf3  \cf4 import\cf3  \cf6 training_spam_docs\cf3 , \cf6 training_doc_tokens\cf3 , \cf6 training_labels\cf3 , \cf6 test_labels\cf3 , \cf6 test_spam_docs\cf3 , \cf6 training_docs\cf3 , \cf6 test_docs\cf3 \cb1 \
+\cf4 \cb5 from\cf3  \cf6 sklearn\cf3 .\cf7 naive_bayes\cf3  \cf4 import\cf3  \cf6 MultinomialNB\cf3 \cb1 \
+\
+\cf4 \cb5 def create_features_dictionary\cf3 (\cf6 document_tokens\cf3 ):\cb1 \
+\cb5   \cf6 features_dictionary\cf3  = \{\}\cb1 \
+\cb5   \cf6 index\cf3  = \cf6 0\cf3 \cb1 \
+\cb5   \cf4 for\cf3  \cf6 token\cf3  \cf4 in\cf3  \cf6 document_tokens\cf3 :\cb1 \
+\cb5     \cf4 if\cf3  \cf6 token\cf3  \cf4 not\cf3  \cf4 in\cf3  \cf6 features_dictionary\cf3 :\cb1 \
+\cb5       \cf6 features_dictionary\cf3 [\cf6 token\cf3 ] = \cf6 index\cf3 \cb1 \
+\cb5       \cf6 index\cf3  += \cf6 1\cf3 \cb1 \
+\cb5   \cf4 return\cf3  \cf6 features_dictionary\cf3 \cb1 \
+\
+\cf4 \cb5 def tokens_to_bow_vector\cf3 (\cf6 document_tokens\cf3 , \cf6 features_dictionary\cf3 ):\cb1 \
+\cb5   \cf6 bow_vector\cf3  = [\cf6 0\cf3 ] * len(\cf6 features_dictionary\cf3 )\cb1 \
+\cb5   \cf4 for\cf3  \cf6 token\cf3  \cf4 in\cf3  \cf6 document_tokens\cf3 :\cb1 \
+\cb5     \cf4 if\cf3  \cf6 token\cf3  \cf4 in\cf3  \cf6 features_dictionary\cf3 :\cb1 \
+\cb5       \cf6 feature_index\cf3  = \cf6 features_dictionary\cf3 [\cf6 token\cf3 ]\cb1 \
+\cb5       \cf6 bow_vector\cf3 [\cf6 feature_index\cf3 ] += \cf6 1\cf3 \cb1 \
+\cb5   \cf4 return\cf3  \cf6 bow_vector\cf3 \cb1 \
+\
+\pard\pardeftab720\sl440\partightenfactor0
+\cf8 \cb5 # Define bow_sms_dictionary:\cf3 \cb1 \
+\
+\pard\pardeftab720\sl440\partightenfactor0
+\cf6 \cb5 bow_sms_dictionary\cf3 =\cf6 create_features_dictionary\cf3 (\cf6 training_doc_tokens\cf3 )\cb1 \
+\pard\pardeftab720\sl440\partightenfactor0
+\cf8 \cb5 # Define training_vectors:\cf3 \cb1 \
+\pard\pardeftab720\sl440\partightenfactor0
+\cf6 \cb5 training_vectors\cf3 = [\cf6 tokens_to_bow_vector\cf3 (\cf6 training_doc\cf3 , \cf6 bow_sms_dictionary\cf3 ) \cf4 for\cf3  \cf6 training_doc\cf3  \cf4 in\cf3  \cf6 training_spam_docs\cf3 ]\cb1 \
+\pard\pardeftab720\sl440\partightenfactor0
+\cf8 \cb5 # Define test_vectors:\cf3 \cb1 \
+\pard\pardeftab720\sl440\partightenfactor0
+\cf6 \cb5 test_vectors\cf3 =[\cf6 tokens_to_bow_vector\cf3 (\cf6 test_doc\cf3 , \cf6 bow_sms_dictionary\cf3 ) \cf4 for\cf3  \cf6 test_doc\cf3  \cf4 in\cf3  \cf6 test_spam_docs\cf3 ]\cb1 \
+\
+\cf6 \cb5 spam_classifier\cf3  = \cf6 MultinomialNB\cf3 ()\cb1 \
+\
+\cf4 \cb5 def spam_or_not\cf3 (\cf6 label\cf3 ):\cb1 \
+\cb5   \cf4 return\cf3  \cf9 "spam"\cf3  \cf4 if\cf3  \cf6 label\cf3  \cf4 else\cf3  \cf9 "not spam"\cf3 \cb1 \
+\
+\pard\pardeftab720\sl440\partightenfactor0
+\cf8 \cb5 # Uncomment the code below when you're done:\cf3 \cb1 \
+\pard\pardeftab720\sl440\partightenfactor0
+\cf6 \cb5 spam_classifier\cf3 .\cf7 fit\cf3 (\cf6 training_vectors\cf3 , \cf6 training_labels\cf3 )\cb1 \
+\
+\cf6 \cb5 predictions\cf3  = \cf6 spam_classifier\cf3 .\cf7 score\cf3 (\cf6 test_vectors\cf3 , \cf6 test_labels\cf3 )\cb1 \
+\
+\cb5 print(\cf9 "The predictions for the test data were \{0\}% accurate.\\n\\nFor example, '\{1\}' was classified as \{2\}.\\n\\nMeanwhile, '\{3\}' was classified as \{4\}."\cf3 .\cf7 format\cf3 (\cf6 predictions\cf3  * \cf6 100\cf3 , \cf6 test_docs\cf3 [\cf6 0\cf3 ], \cf6 spam_or_not\cf3 (\cf6 test_labels\cf3 [\cf6 0\cf3 ]), \cf6 test_docs\cf3 [\cf6 10\cf3 ], \cf6 spam_or_not\cf3 (\cf6 test_labels\cf3 [\cf6 10\cf3 ])))\cb1 \
+\
+\
+\'97\cf4 \cb5 from\cf3  \cf6 spam_data\cf3  \cf4 import\cf3  \cf6 training_spam_docs\cf3 , \cf6 training_doc_tokens\cf3 , \cf6 training_labels\cf3 , \cf6 test_labels\cf3 , \cf6 test_spam_docs\cf3 , \cf6 training_docs\cf3 , \cf6 test_docs\cf3 \cb1 \
+\cf4 \cb5 from\cf3  \cf6 sklearn\cf3 .\cf7 naive_bayes\cf3  \cf4 import\cf3  \cf6 MultinomialNB\cf3 \cb1 \
+\pard\pardeftab720\sl440\partightenfactor0
+\cf8 \cb5 # Import CountVectorizer from sklearn:\cf3 \cb1 \
+\pard\pardeftab720\sl440\partightenfactor0
+\cf4 \cb5 from\cf3  \cf6 sklearn\cf3 .\cf7 feature_extraction\cf6 .\cf7 text\cf3  \cf4 import\cf3  \cf6 CountVectorizer\cf3 \cb1 \
+\
+\pard\pardeftab720\sl440\partightenfactor0
+\cf8 \cb5 # Define bow_vectorizer:\cf3 \cb1 \
+\pard\pardeftab720\sl440\partightenfactor0
+\cf6 \cb5 bow_vectorizer\cf3  = \cf6 CountVectorizer\cf3 ()\cb1 \
+\
+\pard\pardeftab720\sl440\partightenfactor0
+\cf8 \cb5 # Define training_vectors:\cf3 \cb1 \
+\pard\pardeftab720\sl440\partightenfactor0
+\cf6 \cb5 training_vectors\cf3 =\cf6 bow_vectorizer\cf3 .\cf7 fit_transform\cf3 (\cf6 training_docs\cf3 )\cb1 \
+\pard\pardeftab720\sl440\partightenfactor0
+\cf8 \cb5 # Define test_vectors:\cf3 \cb1 \
+\pard\pardeftab720\sl440\partightenfactor0
+\cf6 \cb5 test_vectors\cf3 =\cf6 bow_vectorizer\cf3 .\cf7 transform\cf3 (\cf6 test_docs\cf3 )\cb1 \
+\
+\cf6 \cb5 spam_classifier\cf3  = \cf6 MultinomialNB\cf3 ()\cb1 \
+\
+\cf4 \cb5 def spam_or_not\cf3 (\cf6 label\cf3 ):\cb1 \
+\cb5   \cf4 return\cf3  \cf9 "spam"\cf3  \cf4 if\cf3  \cf6 label\cf3  \cf4 else\cf3  \cf9 "not spam"\cf3 \cb1 \
+\
+\pard\pardeftab720\sl440\partightenfactor0
+\cf8 \cb5 #Uncomment the code below when you're done:\cf3 \cb1 \
+\pard\pardeftab720\sl440\partightenfactor0
+\cf6 \cb5 spam_classifier\cf3 .\cf7 fit\cf3 (\cf6 training_vectors\cf3 , \cf6 training_labels\cf3 )\cb1 \
+\
+\cf6 \cb5 predictions\cf3  = \cf6 spam_classifier\cf3 .\cf7 score\cf3 (\cf6 test_vectors\cf3 , \cf6 test_labels\cf3 )\cb1 \
+\
+\cb5 print(\cf9 "The predictions for the test data were \{0\}% accurate.\\n\\nFor example, '\{1\}' was classified as \{2\}.\\n\\nMeanwhile, '\{3\}' was classified as \{4\}."\cf3 .\cf7 format\cf3 (\cf6 predictions\cf3  * \cf6 100\cf3 , \cf6 test_docs\cf3 [\cf6 7\cf3 ], \cf6 spam_or_not\cf3 (\cf6 test_labels\cf3 [\cf6 7\cf3 ]), \cf6 test_docs\cf3 [\cf6 15\cf3 ], \cf6 spam_or_not\cf3 (\cf6 test_labels\cf3 [\cf6 15\cf3 ])))\
+\
+\
+\
+\'97 \cf4 from\cf3  \cf6 preprocessing\cf3  \cf4 import\cf3  \cf6 preprocess_text\cf3 \cb1 \
+\cf4 \cb5 from\cf3  \cf6 nltk\cf3 .\cf7 util\cf3  \cf4 import\cf3  \cf6 ngrams\cf3 \cb1 \
+\cf4 \cb5 from\cf3  \cf6 collections\cf3  \cf4 import\cf3  \cf6 Counter\cf3 \cb1 \
+\
+\cf6 \cb5 text\cf3  = \cf9 "It's exciting to watch flying fish after a hard day's work. I don't know why some fish prefer flying and other fish would rather swim. It seems like the fish just woke up one day and decided, 'hey, today is the day to fly away.'"\cf3 \cb1 \
+\cf6 \cb5 tokens\cf3  = \cf6 preprocess_text\cf3 (\cf6 text\cf3 )\cb1 \
+\
+\pard\pardeftab720\sl440\partightenfactor0
+\cf8 \cb5 # Bigram approach:\cf3 \cb1 \
+\pard\pardeftab720\sl440\partightenfactor0
+\cf6 \cb5 bigrams_prepped\cf3  = \cf6 ngrams\cf3 (\cf6 tokens\cf3 , \cf6 2\cf3 )\cb1 \
+\cf6 \cb5 bigrams\cf3  = \cf6 Counter\cf3 (\cf6 bigrams_prepped\cf3 )\cb1 \
+\cb5 print(\cf9 "Three most frequent word sequences and the number of occurrences according to Bigrams:"\cf3 )\cb1 \
+\cb5 print(\cf6 bigrams\cf3 .\cf7 most_common\cf3 (\cf6 3\cf3 ))\cb1 \
+\
+\pard\pardeftab720\sl440\partightenfactor0
+\cf8 \cb5 # Bag-of-Words approach:\cf3 \cb1 \
+\cf8 \cb5 # Define bag_of_words here:\cf3 \cb1 \
+\pard\pardeftab720\sl440\partightenfactor0
+\cf6 \cb5 bag_of_words\cf3 =\cf6 Counter\cf3 (\cf6 tokens\cf3 )\cb1 \
+\
+\cb5 print(\cf9 "\\nThree most frequent words and number of occurrences according to Bag-of-Words:"\cf3 )\cb1 \
+\
+\cf6 \cb5 most_common_three\cf3 =\cf6 bag_of_words\cf3 .\cf7 most_common\cf3 (\cf6 3\cf3 )\cb1 \
+\cb5 print(\cf6 most_common_three\cf3 )\cb1 \
+\
+\
+\'97\cf4 \cb5 import\cf3  \cf6 nltk\cf3 , \cf6 re\cf3 , \cf6 random\cf3 \cb1 \
+\cf4 \cb5 from\cf3  \cf6 nltk\cf3 .\cf7 tokenize\cf3  \cf4 import\cf3  \cf6 word_tokenize\cf3 \cb1 \
+\cf4 \cb5 from\cf3  \cf6 collections\cf3  \cf4 import\cf3  \cf6 defaultdict\cf3 , \cf6 deque\cf3 , \cf6 Counter\cf3 \cb1 \
+\cf4 \cb5 from\cf3  \cf6 document\cf3  \cf4 import\cf3  \cf6 oscar_wilde_thoughts\cf3 \cb1 \
+\
+\pard\pardeftab720\sl440\partightenfactor0
+\cf8 \cb5 # Change sequence_length:\cf3 \cb1 \
+\pard\pardeftab720\sl440\partightenfactor0
+\cf6 \cb5 sequence_length\cf3  = \cf6 1\cf3 \cb1 \
+\
+\cf4 \cb5 class MarkovChain\cf3 :\cb1 \
+\cb5   \cf4 def __init__\cf3 (\cf6 self\cf3 ):\cb1 \
+\cb5     \cf6 self\cf3 .\cf7 lookup_dict\cf3  = \cf6 defaultdict\cf3 (list)\cb1 \
+\cb5     \cf6 self\cf3 .\cf7 most_common\cf3  = []\cb1 \
+\cb5     \cf6 self\cf3 .\cf7 _seeded\cf3  = \cf4 False\cf3 \cb1 \
+\cb5     \cf6 self\cf3 .\cf7 __seed_me\cf3 ()\cb1 \
+\
+\cb5   \cf4 def __seed_me\cf3 (\cf6 self\cf3 , \cf6 rand_seed\cf3 =\cf4 None\cf3 ):\cb1 \
+\cb5     \cf4 if\cf3  \cf6 self\cf3 .\cf7 _seeded\cf3  \cf4 is\cf3  \cf4 not\cf3  \cf4 True\cf3 :\cb1 \
+\cb5       \cf4 try\cf3 :\cb1 \
+\cb5         \cf4 if\cf3  \cf6 rand_seed\cf3  \cf4 is\cf3  \cf4 not\cf3  \cf4 None\cf3 :\cb1 \
+\cb5           \cf6 random\cf3 .\cf7 seed\cf3 (\cf6 rand_seed\cf3 )\cb1 \
+\cb5         \cf4 else\cf3 :\cb1 \
+\cb5           \cf6 random\cf3 .\cf7 seed\cf3 ()\cb1 \
+\cb5         \cf6 self\cf3 .\cf7 _seeded\cf3  = \cf4 True\cf3 \cb1 \
+\cb5       \cf4 except\cf3  \cf6 NotImplementedError\cf3 :\cb1 \
+\cb5         \cf6 self\cf3 .\cf7 _seeded\cf3  = \cf4 False\cf3 \cb1 \
+\cb5     \cb1 \
+\cb5   \cf4 def add_document\cf3 (\cf6 self\cf3 , str):\cb1 \
+\cb5     \cf6 preprocessed_list\cf3  = \cf6 self\cf3 .\cf7 _preprocess\cf3 (str)\cb1 \
+\cb5     \cf6 self\cf3 .\cf7 most_common\cf3  = \cf6 Counter\cf3 (\cf6 preprocessed_list\cf3 ).\cf7 most_common\cf3 (\cf6 50\cf3 )\cb1 \
+\cb5     \cf6 pairs\cf3  = \cf6 self\cf3 .\cf7 __generate_tuple_keys\cf3 (\cf6 preprocessed_list\cf3 )\cb1 \
+\cb5     \cf4 for\cf3  \cf6 pair\cf3  \cf4 in\cf3  \cf6 pairs\cf3 :\cb1 \
+\cb5       \cf6 self\cf3 .\cf7 lookup_dict\cf3 [\cf6 pair\cf3 [\cf6 0\cf3 ]].\cf7 append\cf3 (\cf6 pair\cf3 [\cf6 1\cf3 ])\cb1 \
+\cb5   \cb1 \
+\cb5   \cf4 def _preprocess\cf3 (\cf6 self\cf3 , str):\cb1 \
+\cb5     \cf6 cleaned\cf3  = \cf6 re\cf3 .\cf7 sub\cf3 (\cf6 r\cf9 '\\W+'\cf3 , \cf9 ' '\cf3 , str).\cf7 lower\cf3 ()\cb1 \
+\cb5     \cf6 tokenized\cf3  = \cf6 word_tokenize\cf3 (\cf6 cleaned\cf3 )\cb1 \
+\cb5     \cf4 return\cf3  \cf6 tokenized\cf3 \cb1 \
+\
+\cb5   \cf4 def __generate_tuple_keys\cf3 (\cf6 self\cf3 , \cf6 data\cf3 ):\cb1 \
+\cb5     \cf4 if\cf3  len(\cf6 data\cf3 ) \cf6 <\cf3  \cf6 sequence_length\cf3 :\cb1 \
+\cb5       \cf4 return\cf3 \cb1 \
+\
+\cb5     \cf4 for\cf3  \cf6 i\cf3  \cf4 in\cf3  range(len(\cf6 data\cf3 ) - \cf6 1\cf3 ):\cb1 \
+\cb5       \cf4 yield\cf3  [ \cf6 data\cf3 [\cf6 i\cf3 ], \cf6 data\cf3 [\cf6 i\cf3  + \cf6 1\cf3 ] ]\cb1 \
+\cb5       \cb1 \
+\cb5   \cf4 def generate_text\cf3 (\cf6 self\cf3 , \cf6 max_length\cf3 =\cf6 50\cf3 ):\cb1 \
+\cb5     \cf6 context\cf3  = \cf6 deque\cf3 ()\cb1 \
+\cb5     \cf6 output\cf3  = []\cb1 \
+\cb5     \cf4 if\cf3  len(\cf6 self\cf3 .\cf7 lookup_dict\cf3 ) \cf6 >\cf3  \cf6 0\cf3 :\cb1 \
+\cb5       \cf6 self\cf3 .\cf7 __seed_me\cf3 (\cf6 rand_seed\cf3 =len(\cf6 self\cf3 .\cf7 lookup_dict\cf3 ))\cb1 \
+\cb5       \cf6 chain_head\cf3  = [list(\cf6 self\cf3 .\cf7 lookup_dict\cf3 )[\cf6 0\cf3 ]]\cb1 \
+\cb5       \cf6 context\cf3 .\cf7 extend\cf3 (\cf6 chain_head\cf3 )\cb1 \
+\cb5       \cf4 if\cf3  \cf6 sequence_length\cf3  \cf6 >\cf3  \cf6 1\cf3 :\cb1 \
+\cb5         \cf4 while\cf3  len(\cf6 output\cf3 ) \cf6 <\cf3  (\cf6 max_length\cf3  - \cf6 1\cf3 ):\cb1 \
+\cb5           \cf6 next_choices\cf3  = \cf6 self\cf3 .\cf7 lookup_dict\cf3 [\cf6 context\cf3 [\cf6 -1\cf3 ]]\cb1 \
+\cb5           \cf4 if\cf3  len(\cf6 next_choices\cf3 ) \cf6 >\cf3  \cf6 0\cf3 :\cb1 \
+\cb5             \cf6 next_word\cf3  = \cf6 random\cf3 .\cf7 choice\cf3 (\cf6 next_choices\cf3 )\cb1 \
+\cb5             \cf6 context\cf3 .\cf7 append\cf3 (\cf6 next_word\cf3 )\cb1 \
+\cb5             \cf6 output\cf3 .\cf7 append\cf3 (\cf6 context\cf3 .\cf7 popleft\cf3 ())\cb1 \
+\cb5           \cf4 else\cf3 :\cb1 \
+\cb5             \cf4 break\cf3 \cb1 \
+\cb5         \cf6 output\cf3 .\cf7 extend\cf3 (list(\cf6 context\cf3 ))\cb1 \
+\cb5       \cf4 else\cf3 :\cb1 \
+\cb5         \cf4 while\cf3  len(\cf6 output\cf3 ) \cf6 <\cf3  (\cf6 max_length\cf3  - \cf6 1\cf3 ):\cb1 \
+\cb5           \cf6 next_choices\cf3  = [\cf6 word\cf3 [\cf6 0\cf3 ] \cf4 for\cf3  \cf6 word\cf3  \cf4 in\cf3  \cf6 self\cf3 .\cf7 most_common\cf3 ]\cb1 \
+\cb5           \cf6 next_word\cf3  = \cf6 random\cf3 .\cf7 choice\cf3 (\cf6 next_choices\cf3 )\cb1 \
+\cb5           \cf6 output\cf3 .\cf7 append\cf3 (\cf6 next_word\cf3 )\cb1 \
+\cb5     \cf4 return\cf3  \cf9 " "\cf3 .\cf7 join\cf3 (\cf6 output\cf3 )\cb1 \
+\
+\cf6 \cb5 my_markov\cf3  = \cf6 MarkovChain\cf3 ()\cb1 \
+\cf6 \cb5 my_markov\cf3 .\cf7 add_document\cf3 (\cf6 oscar_wilde_thoughts\cf3 )\cb1 \
+\cf6 \cb5 random_oscar_wilde\cf3  = \cf6 my_markov\cf3 .\cf7 generate_text\cf3 ()\cb1 \
+\cb5 print(\cf6 random_oscar_wilde\cf3 )\cb1 \
+\
+}
